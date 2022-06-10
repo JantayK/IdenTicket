@@ -8,7 +8,7 @@ namespace IdenTicket.Models
     public class AirplaneModel
     {
         public int Id { get; set; }
-        public string Models { get; set; }
+        public string Model { get; set; }
 
     }
 }
