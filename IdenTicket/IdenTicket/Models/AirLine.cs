@@ -13,6 +13,7 @@ namespace IdenTicket.Models
     {
         public int Id { get; set; }
         public int CountryId { get; set; }
+
         [Required]
         [StringLength(50, MinimumLength = 5)]
         public string Name { get; set; }

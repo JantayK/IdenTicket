@@ -15,5 +15,6 @@ namespace IdenTicket.Models
         public int CustomerId { get; set; }
         public int ClassType { get; set; }
         public virtual Flight Flight { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }
