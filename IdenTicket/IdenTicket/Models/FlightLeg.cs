@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace IdenTicket.Models
 {
+    /// <summary>
+    /// Класс Этапа Рейса
+    /// </summary>
     public class FlightLeg
     {
         public int FlightId { get; set; }
