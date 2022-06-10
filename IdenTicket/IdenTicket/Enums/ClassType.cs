@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace IdenTicket.Enums
 {
-    public class ClassType
+    public enum ClassType
     {
+        Econom = 1
     }
 }

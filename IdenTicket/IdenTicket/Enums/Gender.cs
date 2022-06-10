@@ -5,7 +5,10 @@ using System.Threading.Tasks;
 
 namespace IdenTicket.Enums
 {
-    public class Gender
+    public enum Gender
     {
+        Male = 1,
+        Female = 2,
+        X = 3
     }
 }

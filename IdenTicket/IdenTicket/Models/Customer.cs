@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace IdenTicket.Models
 {
-    public class Customer
+    public class Customer  
     {
         public int Id { get; set; }
         public int CountryId { get; set; }

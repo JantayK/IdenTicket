@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 
 namespace IdenTicket.Enums
 {
-    public class FlightType
+    public enum FlightType
     {
+        DirectOneWay = 1,
+        DirectWithReturn = 2
     }
 }

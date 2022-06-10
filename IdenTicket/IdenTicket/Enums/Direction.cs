@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 
 namespace IdenTicket.Enums
 {
-    public class Direction
+    public enum Direction
     {
+        Direct = 1,
+        Back = 2
     }
 }
