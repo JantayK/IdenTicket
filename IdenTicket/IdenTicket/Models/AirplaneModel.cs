@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace IdenTicket.Models
 {
+    /// <summary>
+    /// Класс Модели Самолета
+    /// </summary>
     public class AirplaneModel
     {
         public int Id { get; set; }
