@@ -7,7 +7,7 @@ namespace IdenTicket.Enums
 {
     public enum Direction
     {
-        Direct = 1,
+        Forth = 1,
         Back = 2
     }
 }

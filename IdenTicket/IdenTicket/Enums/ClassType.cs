@@ -7,6 +7,6 @@ namespace IdenTicket.Enums
 {
     public enum ClassType
     {
-        Econom = 1
+        Economy = 1
     }
 }

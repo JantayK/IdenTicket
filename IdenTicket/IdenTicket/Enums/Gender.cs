@@ -9,6 +9,6 @@ namespace IdenTicket.Enums
     {
         Male = 1,
         Female = 2,
-        X = 3
+        Other = 3
     }
 }
