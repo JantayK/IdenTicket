@@ -13,6 +13,5 @@ namespace IdenTicket.Data
             : base(options)
         {
         }
-
     }
 }

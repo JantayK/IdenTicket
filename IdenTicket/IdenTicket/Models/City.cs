@@ -18,5 +18,7 @@ namespace IdenTicket.Models
         [StringLength(30, MinimumLength = 5)]
         public string Name { get; set; }
 
+        public virtual Country Country { get; set; }
+
     }
 }

@@ -15,19 +15,23 @@ namespace IdenTicket.Models
         public int CountryId { get; set; }
 
         [Required]
-        [StringLength(50, MinimumLength = 5)]
+        [StringLength(50)]
         public string FirstName { get; set; }
 
-        [StringLength(50, MinimumLength = 5)]
+        [StringLength(50)]
         public string Patronymic { get; set; }
 
-        [StringLength(50, MinimumLength = 5)]
+        [Required]
+        [StringLength(50)]
         public string LastName { get; set; }
+
+        [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
         public int Gender { get; set; }
 
         [Required]
         public string PassportNumber { get; set; }
+        public virtual Country Country { get; set; }
 
     }
 }
