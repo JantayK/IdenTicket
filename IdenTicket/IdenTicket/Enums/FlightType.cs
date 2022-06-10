@@ -7,7 +7,7 @@ namespace IdenTicket.Enums
 {
     public enum FlightType
     {
-        ForthOneWay = 1,
-        ForthWithReturn = 2
+        DirectOneWay = 1,
+        DirectWithReturn = 2
     }
 }
