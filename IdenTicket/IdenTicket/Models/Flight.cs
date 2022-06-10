@@ -5,7 +5,10 @@ using System.Threading.Tasks;
 
 namespace IdenTicket.Models
 {
-    public class Tickets
+    public class Flight
     {
+        public int Id { get; set; }
+        public int FlightType { get; set; }
+
     }
 }
