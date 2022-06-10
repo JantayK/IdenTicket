@@ -15,7 +15,7 @@ namespace IdenTicket.Models
         public int CountryId { get; set; }
 
         [Required]
-        [StringLength(30, MinimumLength = 5)]
+        [StringLength(30)]
         public string Name { get; set; }
 
         public virtual Country Country { get; set; }

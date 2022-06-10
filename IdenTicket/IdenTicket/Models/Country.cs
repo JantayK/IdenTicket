@@ -14,7 +14,7 @@ namespace IdenTicket.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(50, MinimumLength = 5)]
+        [StringLength(50)]
         public string Name { get; set; }
 
     }
