@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using IdenTicket.Enums;
+using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace IdenTicket.Models
 {
     /// <summary>
     /// Класс Клиента
     /// </summary>
-    public class Customer
+    public class Customer : User
     {
-        public int Id { get; set; }
         public int CountryId { get; set; }
 
         [Required]
@@ -25,13 +22,15 @@ namespace IdenTicket.Models
         [StringLength(50)]
         public string LastName { get; set; }
 
+        public Gender Gender { get; set; }
+
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
-        public int Gender { get; set; }
 
         [Required]
+        [StringLength(150)]
         public string PassportNumber { get; set; }
-        public virtual Country Country { get; set; }
 
+        public virtual Country Country { get; set; }
     }
 }
