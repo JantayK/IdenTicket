@@ -1,5 +1,3 @@
-using System;
-
 namespace IdenTicket.Models
 {
     public class ErrorViewModel
