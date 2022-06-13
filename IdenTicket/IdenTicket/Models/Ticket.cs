@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using IdenTicket.Enums;
 
 namespace IdenTicket.Models
 {
@@ -13,7 +10,9 @@ namespace IdenTicket.Models
         public int Id { get; set; }
         public int FlightId { get; set; }
         public int CustomerId { get; set; }
-        public int ClassType { get; set; }
+
+        public ClassType ClassType { get; set; }
+
         public virtual Flight Flight { get; set; }
         public virtual Customer Customer { get; set; }
     }

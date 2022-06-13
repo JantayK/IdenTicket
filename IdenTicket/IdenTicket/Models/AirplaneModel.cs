@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace IdenTicket.Models
 {
@@ -11,7 +9,10 @@ namespace IdenTicket.Models
     public class AirplaneModel
     {
         public int Id { get; set; }
+
+        [StringLength(70)]
         public string Model { get; set; }
 
+        public virtual ICollection<FlightLeg> FlightLegs { get; set; }
     }
 }
