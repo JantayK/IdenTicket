@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using IdenTicket.Interfaces;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace IdenTicket.Models
@@ -6,7 +7,7 @@ namespace IdenTicket.Models
     /// <summary>
     /// Класс Страны
     /// </summary>
-    public class Country
+    public class Country : IEntity
     {
         public int Id { get; set; }
 
@@ -15,6 +16,7 @@ namespace IdenTicket.Models
         public string Name { get; set; }
 
         public virtual ICollection<City> Cities { get; set; }
+        public virtual ICollection<AirLine> AirLines { get; set; }
         public virtual ICollection<Customer> Customers { get; set; }
     }
 }
