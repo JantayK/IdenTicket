@@ -6,27 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.cs" />
-    <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs" />
-    <Compile Remove="Data\Migrations\20220613082617_CreatingTables.cs" />
-    <Compile Remove="Data\Migrations\20220613082617_CreatingTables.Designer.cs" />
-    <Compile Remove="Data\Migrations\20220613083200_CreatingTables.cs" />
-    <Compile Remove="Data\Migrations\20220613083200_CreatingTables.Designer.cs" />
-    <Compile Remove="Migrations\20220613085102_IdentityMigration.cs" />
-    <Compile Remove="Migrations\20220613085102_IdentityMigration.Designer.cs" />
-    <Compile Remove="Migrations\20220613085151_IdentityMigration.cs" />
-    <Compile Remove="Migrations\20220613085151_IdentityMigration.Designer.cs" />
-    <Compile Remove="Migrations\20220613085229_InitialMigration.cs" />
-    <Compile Remove="Migrations\20220613085229_InitialMigration.Designer.cs" />
-    <Compile Remove="Migrations\20220613090156_InitialMigration.cs" />
-    <Compile Remove="Migrations\20220613090156_InitialMigration.Designer.cs" />
-    <Compile Remove="Migrations\20220613092028_InitialMigration.cs" />
-    <Compile Remove="Migrations\20220613092028_InitialMigration.Designer.cs" />
-    <Compile Remove="Migrations\20220613092507_InitialMigration.cs" />
-    <Compile Remove="Migrations\20220613092507_InitialMigration.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.18" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.25" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.25" />
@@ -37,10 +16,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Data\Migrations\" />
   </ItemGroup>
 
 </Project>
