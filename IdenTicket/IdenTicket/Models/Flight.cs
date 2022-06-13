@@ -1,4 +1,5 @@
 ﻿using IdenTicket.Enums;
+using IdenTicket.Interfaces;
 using System.Collections.Generic;
 
 namespace IdenTicket.Models
@@ -6,7 +7,7 @@ namespace IdenTicket.Models
     /// <summary>
     /// Класс Рейса
     /// </summary>
-    public class Flight
+    public class Flight : IEntity
     {
         public int Id { get; set; }
         public FlightType FlightType { get; set; }
