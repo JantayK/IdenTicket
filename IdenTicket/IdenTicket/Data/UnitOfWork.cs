@@ -15,7 +15,7 @@ namespace IdenTicket.Data
 
         public UnitOfWork(ApplicationDbContext context)
         {
-            context = _context;
+            _context = context;
         }
 
         public TicketRepository Tickets

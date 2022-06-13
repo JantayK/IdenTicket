@@ -26,6 +26,7 @@ namespace IdenTicket
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddScoped<UnitOfWork>();
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
