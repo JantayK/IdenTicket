@@ -1,14 +1,20 @@
-﻿using System;
+using IdenTicket.Interfaces;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace IdenTicket.Models
 {
-    public class AirplaneModel
+    /// <summary>
+    /// Класс Модели Самолета
+    /// </summary>
+    public class AirplaneModel : IEntity
     {
         public int Id { get; set; }
-        public string Models { get; set; }
 
+        [Required]
+        [StringLength(70)]
+        public string Model { get; set; }
+
+        public virtual ICollection<FlightLeg> FlightLegs { get; set; }
     }
 }
