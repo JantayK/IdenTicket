@@ -1,4 +1,5 @@
 ﻿using IdenTicket.Enums;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -7,7 +8,7 @@ namespace IdenTicket.Models
     /// <summary>
     /// Класс Клиента
     /// </summary>
-    public class Customer : User
+    public class Customer : IdentityUser
     {
         public int CountryId { get; set; }
 

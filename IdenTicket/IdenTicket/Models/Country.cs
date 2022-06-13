@@ -16,6 +16,7 @@ namespace IdenTicket.Models
         public string Name { get; set; }
 
         public virtual ICollection<City> Cities { get; set; }
+        public virtual ICollection<AirLine> AirLines { get; set; }
         public virtual ICollection<Customer> Customers { get; set; }
     }
 }
