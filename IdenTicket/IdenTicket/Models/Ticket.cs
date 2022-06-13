@@ -1,16 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using IdenTicket.Enums;
+using IdenTicket.Interfaces;
 
 namespace IdenTicket.Models
 {
-    public class Ticket
+    /// <summary>
+    /// Класс Билета
+    /// </summary>
+    public class Ticket : IEntity
     {
         public int Id { get; set; }
         public int FlightId { get; set; }
         public int CustomerId { get; set; }
-        public int ClassType { get; set; }
 
+        public ClassType ClassType { get; set; }
+
+        public virtual Flight Flight { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }

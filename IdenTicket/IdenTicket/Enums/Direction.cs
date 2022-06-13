@@ -1,13 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace IdenTicket.Enums
 {
+    /// <summary>
+    /// Направление
+    /// Туда = 1
+    /// Обратно = 2
+    /// </summary>
     public enum Direction
     {
-        Direct = 1,
+        [Description("Туда")]
+        Forth = 1,
+        [Description("Обратно")]
         Back = 2
     }
 }

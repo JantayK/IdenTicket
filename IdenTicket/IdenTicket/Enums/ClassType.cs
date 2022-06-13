@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace IdenTicket.Enums
 {
+    /// <summary>
+    /// Тип класса:
+    /// Эконом = 1
+    /// </summary>
     public enum ClassType
     {
-        Econom = 1
+        [Description("Эконом")]
+        Economy = 1
     }
 }

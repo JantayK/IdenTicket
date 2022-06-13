@@ -1,14 +1,21 @@
-﻿using System;
+﻿using IdenTicket.Interfaces;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace IdenTicket.Models
 {
-    public class Country
+    /// <summary>
+    /// Класс Страны
+    /// </summary>
+    public class Country : IEntity
     {
         public int Id { get; set; }
+
+        [Required]
+        [StringLength(100)]
         public string Name { get; set; }
 
+        public virtual ICollection<City> Cities { get; set; }
+        public virtual ICollection<Customer> Customers { get; set; }
     }
 }
