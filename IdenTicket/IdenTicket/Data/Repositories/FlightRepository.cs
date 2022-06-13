@@ -9,64 +9,64 @@ using System.Threading.Tasks;
 namespace IdenTicket.Data.Repositories
 {
     /// <summary>
-    /// Репозиторий Билета
+    /// Репозиторий рейса
     /// </summary>
-    public class TicketRepository : IRepository<Ticket>
+    public class FlightRepository : IRepository<Flight>
     {
         private readonly ApplicationDbContext _context;
-
-        public TicketRepository(ApplicationDbContext context)
+        public FlightRepository(ApplicationDbContext context)
         {
-            _context = context;
+            context = _context;
         }
+
         /// <summary>
-        /// Получение всех билетов
+        /// Получение всех рейсов
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Ticket> GetAll()
+        public IEnumerable<Flight> GetAll()
         {
-            return _context.Tickets.ToList();
+            return _context.Flights.ToList();
         }
 
         /// <summary>
-        /// Получение одного билета по id
+        /// Получение рейса по id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Ticket GetById(int id)
+        public Flight GetById(int id)
         {
-            return _context.Tickets.Find(id);
+            return _context.Flights.Find(id);
         }
 
         /// <summary>
-        /// Создание билета
+        /// Создание рейса
         /// </summary>
         /// <param name="item"></param>
-        public void Create(Ticket item)
+        public void Create(Flight item)
         {
-            _context.Tickets.Add(item);
+            _context.Flights.Add(item);
         }
 
         /// <summary>
         /// Обновление
         /// </summary>
         /// <param name="item"></param>
-        public void Update(Ticket item)
+        public void Update(Flight item)
         {
             _context.Entry(item).State = EntityState.Modified;
         }
 
-       /// <summary>
-       /// Удаление билета
-       /// </summary>
-       /// <param name="id"></param>
+        /// <summary>
+        /// Удаление рейса
+        /// </summary>
+        /// <param name="id"></param>
         public void Delete(int id)
         {
-            Ticket ticket = _context.Tickets.Find(id);
-            if(ticket != null)
+            Flight flight = _context.Flights.Find(id);
+            if(flight != null)
             {
-                _context.Tickets.Remove(ticket);
-            }    
+                _context.Remove(flight);
+            }
         }
     }
 }

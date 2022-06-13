@@ -9,7 +9,8 @@ namespace IdenTicket.Interfaces
     /// Интерфейс Репозитория
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IRepository<T> : IDisposable
+    public interface IRepository<T>
+            where T : class
     {
         /// <summary>
         /// Получение всех обьектов
@@ -41,10 +42,5 @@ namespace IdenTicket.Interfaces
         /// </summary>
         /// <param name="id"></param>
         void Delete(int id);
-
-        /// <summary>
-        /// Сохранение изменений
-        /// </summary>
-        void Save();
     }
 }
