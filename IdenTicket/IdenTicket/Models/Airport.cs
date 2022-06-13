@@ -20,6 +20,7 @@ namespace IdenTicket.Models
         public string IATA { get; set; }
 
         public virtual City City { get; set; }
-        public virtual ICollection<FlightLeg> FlightLegs { get; set; }
+        public virtual ICollection<FlightLeg> FlightLegsToDepart { get; set; }
+        public virtual ICollection<FlightLeg> FlightLegsToArrive { get; set; }
     }
 }

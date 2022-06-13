@@ -10,6 +10,7 @@ namespace IdenTicket.Models
     {
         public int Id { get; set; }
 
+        [Required]
         [StringLength(70)]
         public string Model { get; set; }
 
