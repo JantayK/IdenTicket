@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using IdenTicket.Interfaces;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace IdenTicket.Models
@@ -6,7 +7,7 @@ namespace IdenTicket.Models
     /// <summary>
     /// Класс Модели Самолета
     /// </summary>
-    public class AirplaneModel
+    public class AirplaneModel : IEntity
     {
         public int Id { get; set; }
 
