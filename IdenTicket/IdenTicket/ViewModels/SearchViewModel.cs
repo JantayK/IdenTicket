@@ -12,10 +12,19 @@ namespace IdenTicket.ViewModels
     /// </summary>
     public class SearchViewModel
     {
+        [Display(Name = "Аэропорт отбытия")]
         public string DepartureAirport { get; set; }
+
+        [Display(Name = "Аэропорт прибытия")]
         public string DestinationAirport { get; set; }
+
+        [Display(Name = "Дата отбытия")]
         public DateTime DepartDate { get; set; }
+
+        [Display(Name = "Дата возврата")]
         public DateTime? ReturnDate { get; set; }
+
+        [Display(Name = "Тип рейса")]
         public FlightType FlightType { get; set; }
     }
 }

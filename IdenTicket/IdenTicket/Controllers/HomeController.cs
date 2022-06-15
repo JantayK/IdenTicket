@@ -1,4 +1,4 @@
-﻿using IdenTicket.Data;
+using IdenTicket.Data;
 using IdenTicket.Models;
 using IdenTicket.ViewModels;
 using Microsoft.AspNetCore.Mvc;

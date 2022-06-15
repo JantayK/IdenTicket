@@ -1,8 +1,45 @@
-﻿@{
+﻿@model SearchViewModel
+
+@{
     ViewData["Title"] = "Главная";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Рады видеть вас!</h1>
-    <p>Добро пожаловать на IdenTicket, лучший в мире поисковик авиабилетов.</p>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DepartureAirport" class="control-label"></label>
+                <input asp-for="DepartureAirport" class="form-control" />
+                <span asp-validation-for="DepartureAirport" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DestinationAirport" class="control-label"></label>
+                <input asp-for="DestinationAirport" class="form-control" />
+                <span asp-validation-for="DestinationAirport" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DepartDate" class="control-label"></label>
+                <input asp-for="DepartDate" class="form-control" />
+                <span asp-validation-for="DepartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group @(Model.FlightType != FlightType.DirectOneWay ? "visible-item" : "hidden-item")">
+                <label asp-for="ReturnDate" class="control-label"></label>
+                <input asp-for="ReturnDate" class="form-control" />
+                <span asp-validation-for="ReturnDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FlightType" class="control-label"></label>
+                <select asp-for="FlightType" asp-items="@Html.GetEnumSelectList<FlightType>()" class="form-control"></select>
+                <span asp-validation-for="FlightType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

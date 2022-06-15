@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace IdenTicket.Enums
 {
@@ -9,9 +10,9 @@ namespace IdenTicket.Enums
     /// </summary>
     public enum FlightType
     {
-        [Description("Прямой")]
+        [Display(Name = "Прямой")]
         DirectOneWay = 1,
-        [Description("Прямой с возвратом")]
+        [Display(Name = "Прямой с возвратом")]
         DirectWithReturn = 2
     }
 }
