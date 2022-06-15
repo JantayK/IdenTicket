@@ -16,7 +16,7 @@ namespace IdenTicket.Data.Repositories
         private readonly ApplicationDbContext _context;
         public FlightRepository(ApplicationDbContext context)
         {
-            context = _context;
+            _context = context;
         }
 
         /// <summary>
