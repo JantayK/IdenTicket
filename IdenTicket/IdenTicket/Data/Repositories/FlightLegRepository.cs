@@ -1,5 +1,6 @@
 ﻿using IdenTicket.Interfaces;
 using IdenTicket.Models;
+using IdenTicket.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,11 @@ namespace IdenTicket.Data.Repositories
         public IEnumerable<FlightLeg> GetAll()
         {
             return _context.FlightLegs.ToList();
+        }
+
+        public IEnumerable<FlightLeg> Search(SearchViewModel searchViewModel)
+        {
+            return new List<FlightLeg>();
         }
 
         /// <summary>

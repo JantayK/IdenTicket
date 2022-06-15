@@ -1,5 +1,6 @@
 ﻿using IdenTicket.Interfaces;
 using IdenTicket.Models;
+using IdenTicket.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -36,6 +37,11 @@ namespace IdenTicket.Data.Repositories
         public Flight GetById(int id)
         {
             return _context.Flights.Find(id);
+        }
+
+        public Flight Search(SearchViewModel searchViewModel)
+        {
+            throw new System.Exception();
         }
 
         /// <summary>
