@@ -10,9 +10,22 @@ namespace IdenTicket.Enums
     /// </summary>
     public enum FlightType
     {
-        [Display(Name = "Прямой")]
+        [Display(Name = "Прямой в один конец")]
         DirectOneWay = 1,
+
         [Display(Name = "Прямой с возвратом")]
-        DirectWithReturn = 2
+        DirectWithReturn = 2,
+
+        [Display(Name = "Транзитный в один конец")]
+        TransitOneWay = 3,
+
+        [Display(Name = "Транзитный с возвратом")]
+        TransitWithReturn = 4,
+
+        [Display(Name = "Трансферный в один конец")]
+        TransferOneWay = 5,
+
+        [Display(Name = "Трансферный с возвратом")]
+        TransferWithReturn = 6
     }
 }

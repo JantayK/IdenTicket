@@ -1,4 +1,5 @@
-﻿using IdenTicket.Interfaces;
+﻿using IdenTicket.Enums;
+using IdenTicket.Interfaces;
 using IdenTicket.Models;
 using IdenTicket.ViewModels;
 using Microsoft.EntityFrameworkCore;
@@ -29,9 +30,49 @@ namespace IdenTicket.Data.Repositories
             return _context.FlightLegs.ToList();
         }
 
-        public IEnumerable<FlightLeg> Search(SearchViewModel searchViewModel)
+        public IEnumerable<Flight> Search(SearchViewModel model)
         {
-            return new List<FlightLeg>();
+            List<Flight> result;
+            if (model.FlightType == FlightType.TransferWithReturn
+                || model.FlightType == FlightType.TransitWithReturn)
+            {
+                result = _context.Flights
+                    .AsQueryable()
+                    .Include(f => f.FlightLegs)
+                        .ThenInclude(fl => fl.DepartAirport)
+                    .Include(f => f.FlightLegs)
+                        .ThenInclude(fl => fl.ArriveAirport)
+                    .Include(f => f.FlightLegs)
+                        .ThenInclude(fl => fl.AirplaneModel)
+                    .Include(f => f.FlightLegs)
+                        .ThenInclude(fl => fl.AirLine)
+                    .Where(f =>
+                        f.FlightLegs
+                        .AsQueryable()
+                        .Any(fl =>
+                            fl.Direction == Direction.Forth
+                            && fl.LegNumber == 1
+                            && (fl.DepartAirport.Name == model.DepartureAirport
+                                || fl.DepartAirport.IATA == model.DepartureAirport)
+                            && fl.DepartDate == model.DepartDate)
+                        && f.FlightLegs
+                            .AsQueryable()
+                            .Where(fl => fl.Direction == Direction.Forth)
+                            .OrderByDescending(fl => fl.LegNumber)
+                            .Take(1)
+                            .Any(fl =>
+                                fl.ArriveAirport.Name == model.DestinationAirport
+                                || fl.ArriveAirport.IATA == model.DestinationAirport)
+                        && f.FlightLegs
+                            .AsQueryable()
+                            .Where(fl => fl.Direction == Direction.Back)
+                            .OrderByDescending(fl => fl.LegNumber)
+                            .Take(1)
+                            .Any(fl => fl.ArriveDate == model.ReturnDate))
+                    .ToList();
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -61,7 +102,7 @@ namespace IdenTicket.Data.Repositories
         {
             _context.Entry(item).State = EntityState.Modified;
         }
-        
+
         /// <summary>
         /// Удаление части маршрута
         /// </summary>
@@ -69,7 +110,7 @@ namespace IdenTicket.Data.Repositories
         public void Delete(int id)
         {
             FlightLeg flightLeg = _context.FlightLegs.Find(id);
-            if(flightLeg != null)
+            if (flightLeg != null)
             {
                 _context.FlightLegs.Remove(flightLeg);
             }
