@@ -1,4 +1,5 @@
-﻿using IdenTicket.Interfaces;
+﻿using IdenTicket.Enums;
+using IdenTicket.Interfaces;
 using IdenTicket.Models;
 using IdenTicket.ViewModels;
 using Microsoft.EntityFrameworkCore;
@@ -39,9 +40,138 @@ namespace IdenTicket.Data.Repositories
             return _context.Flights.Find(id);
         }
 
-        public Flight Search(SearchViewModel searchViewModel)
+        public IEnumerable<Flight> Search(SearchViewModel model)
         {
-            throw new System.Exception();
+            List<Flight> result;
+
+            switch (model.FlightType)
+            {
+                case FlightType.DirectOneWay:
+                    result = _context.Flights
+                        .AsQueryable()
+                        .Include(f => f.FlightLegs)
+                            .ThenInclude(fl => fl.DepartAirport)
+                        .Include(f => f.FlightLegs)
+                            .ThenInclude(fl => fl.ArriveAirport)
+                        .Include(f => f.FlightLegs)
+                            .ThenInclude(fl => fl.AirplaneModel)
+                        .Include(f => f.FlightLegs)
+                            .ThenInclude(fl => fl.AirLine)
+                        .Where(f =>
+                            f.FlightLegs
+                            .AsQueryable()
+                            .Any(fl =>
+                                ((fl.ArriveAirport.Name == model.DestinationAirport
+                                    || fl.ArriveAirport.IATA == model.DestinationAirport)
+                                && fl.DepartAirport.Name == model.DepartureAirport
+                                    || fl.DepartAirport.IATA == model.DepartureAirport)
+                                && fl.DepartDate == model.DepartDate))
+                        .ToList();
+                    break;
+                case FlightType.DirectWithReturn:
+                    result = _context.Flights
+                        .AsQueryable()
+                        .Include(f => f.FlightLegs)
+                            .ThenInclude(fl => fl.DepartAirport)
+                        .Include(f => f.FlightLegs)
+                            .ThenInclude(fl => fl.ArriveAirport)
+                        .Include(f => f.FlightLegs)
+                            .ThenInclude(fl => fl.AirplaneModel)
+                        .Include(f => f.FlightLegs)
+                            .ThenInclude(fl => fl.AirLine)
+                        .Where(f =>
+                            f.FlightLegs
+                            .AsQueryable()
+                            .Any(fl => fl.Direction == Direction.Forth
+                                && (fl.DepartAirport.Name == model.DepartureAirport
+                                    || fl.DepartAirport.IATA == model.DepartureAirport)
+                                && (fl.ArriveAirport.Name == model.DestinationAirport
+                                    || fl.ArriveAirport.IATA == model.DestinationAirport)
+                                && fl.DepartDate == model.DepartDate)
+                            && f.FlightLegs
+                                .AsQueryable()
+                                .Any(fl => fl.Direction == Direction.Back
+                                && (fl.DepartAirport.Name == model.DepartureAirport
+                                    || fl.DepartAirport.IATA == model.DepartureAirport)
+                                && (fl.ArriveAirport.Name == model.DestinationAirport
+                                    || fl.ArriveAirport.IATA == model.DestinationAirport)
+                                && fl.DepartDate == model.DepartDate))
+                        .ToList();
+                    break;
+                case FlightType.TransitOneWay:
+                case FlightType.TransferOneWay:
+                    result = _context.Flights
+                        .AsQueryable()
+                        .Include(f => f.FlightLegs)
+                            .ThenInclude(fl => fl.DepartAirport)
+                        .Include(f => f.FlightLegs)
+                            .ThenInclude(fl => fl.ArriveAirport)
+                        .Include(f => f.FlightLegs)
+                            .ThenInclude(fl => fl.AirplaneModel)
+                        .Include(f => f.FlightLegs)
+                            .ThenInclude(fl => fl.AirLine)
+                        .Where(f =>
+                            f.FlightLegs
+                            .AsQueryable()
+                            .Any(fl =>
+                                fl.Direction == Direction.Forth
+                                && fl.LegNumber == 1
+                                && (fl.DepartAirport.Name == model.DepartureAirport
+                                    || fl.DepartAirport.IATA == model.DepartureAirport)
+                                && fl.DepartDate == model.DepartDate)
+                            && f.FlightLegs
+                                .AsQueryable()
+                                .Where(fl => fl.Direction == Direction.Forth)
+                                .OrderByDescending(fl => fl.LegNumber)
+                                .Take(1)
+                                .Any(fl =>
+                                    fl.ArriveAirport.Name == model.DestinationAirport
+                                    || fl.ArriveAirport.IATA == model.DestinationAirport))
+                        .ToList();
+                    break;
+                case FlightType.TransitWithReturn:
+                case FlightType.TransferWithReturn:
+                    result = _context.Flights
+                        .AsQueryable()
+                        .Include(f => f.FlightLegs)
+                            .ThenInclude(fl => fl.DepartAirport)
+                        .Include(f => f.FlightLegs)
+                            .ThenInclude(fl => fl.ArriveAirport)
+                        .Include(f => f.FlightLegs)
+                            .ThenInclude(fl => fl.AirplaneModel)
+                        .Include(f => f.FlightLegs)
+                            .ThenInclude(fl => fl.AirLine)
+                        .Where(f =>
+                            f.FlightLegs
+                            .AsQueryable()
+                            .Any(fl =>
+                                fl.Direction == Direction.Forth
+                                && fl.LegNumber == 1
+                                && (fl.DepartAirport.Name == model.DepartureAirport
+                                    || fl.DepartAirport.IATA == model.DepartureAirport)
+                                && fl.DepartDate == model.DepartDate)
+                            && f.FlightLegs
+                                .AsQueryable()
+                                .Where(fl => fl.Direction == Direction.Forth)
+                                .OrderByDescending(fl => fl.LegNumber)
+                                .Take(1)
+                                .Any(fl =>
+                                    fl.ArriveAirport.Name == model.DestinationAirport
+                                    || fl.ArriveAirport.IATA == model.DestinationAirport)
+                            && f.FlightLegs
+                                .AsQueryable()
+                                .Where(fl => fl.Direction == Direction.Back)
+                                .OrderByDescending(fl => fl.LegNumber)
+                                .Take(1)
+                                .Any(fl => fl.ArriveDate == model.ReturnDate))
+                        .ToList();
+                    break;
+                default:
+                    result = null;
+                    break;
+            }
+
+            return result;
         }
 
         /// <summary>
