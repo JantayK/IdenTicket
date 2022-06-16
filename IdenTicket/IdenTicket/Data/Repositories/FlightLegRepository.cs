@@ -33,43 +33,86 @@ namespace IdenTicket.Data.Repositories
         public IEnumerable<Flight> Search(SearchViewModel model)
         {
             List<Flight> result;
-            if (model.FlightType == FlightType.TransferWithReturn
-                || model.FlightType == FlightType.TransitWithReturn)
+
+            switch (model.FlightType)
             {
-                result = _context.Flights
-                    .AsQueryable()
-                    .Include(f => f.FlightLegs)
-                        .ThenInclude(fl => fl.DepartAirport)
-                    .Include(f => f.FlightLegs)
-                        .ThenInclude(fl => fl.ArriveAirport)
-                    .Include(f => f.FlightLegs)
-                        .ThenInclude(fl => fl.AirplaneModel)
-                    .Include(f => f.FlightLegs)
-                        .ThenInclude(fl => fl.AirLine)
-                    .Where(f =>
-                        f.FlightLegs
+                case FlightType.DirectOneWay:
+                    result = null;
+                    break;
+                case FlightType.DirectWithReturn:
+                    result = null;
+                    break;
+                case FlightType.TransitOneWay:
+                case FlightType.TransferOneWay:
+                    result = _context.Flights
                         .AsQueryable()
-                        .Any(fl =>
-                            fl.Direction == Direction.Forth
-                            && fl.LegNumber == 1
-                            && (fl.DepartAirport.Name == model.DepartureAirport
-                                || fl.DepartAirport.IATA == model.DepartureAirport)
-                            && fl.DepartDate == model.DepartDate)
-                        && f.FlightLegs
+                        .Include(f => f.FlightLegs)
+                            .ThenInclude(fl => fl.DepartAirport)
+                        .Include(f => f.FlightLegs)
+                            .ThenInclude(fl => fl.ArriveAirport)
+                        .Include(f => f.FlightLegs)
+                            .ThenInclude(fl => fl.AirplaneModel)
+                        .Include(f => f.FlightLegs)
+                            .ThenInclude(fl => fl.AirLine)
+                        .Where(f =>
+                            f.FlightLegs
                             .AsQueryable()
-                            .Where(fl => fl.Direction == Direction.Forth)
-                            .OrderByDescending(fl => fl.LegNumber)
-                            .Take(1)
                             .Any(fl =>
-                                fl.ArriveAirport.Name == model.DestinationAirport
-                                || fl.ArriveAirport.IATA == model.DestinationAirport)
-                        && f.FlightLegs
+                                fl.Direction == Direction.Forth
+                                && fl.LegNumber == 1
+                                && (fl.DepartAirport.Name == model.DepartureAirport
+                                    || fl.DepartAirport.IATA == model.DepartureAirport)
+                                && fl.DepartDate == model.DepartDate)
+                            && f.FlightLegs
+                                .AsQueryable()
+                                .Where(fl => fl.Direction == Direction.Forth)
+                                .OrderByDescending(fl => fl.LegNumber)
+                                .Take(1)
+                                .Any(fl =>
+                                    fl.ArriveAirport.Name == model.DestinationAirport
+                                    || fl.ArriveAirport.IATA == model.DestinationAirport))
+                        .ToList();
+                    break;
+                case FlightType.TransitWithReturn:
+                case FlightType.TransferWithReturn:
+                    result = _context.Flights
+                        .AsQueryable()
+                        .Include(f => f.FlightLegs)
+                            .ThenInclude(fl => fl.DepartAirport)
+                        .Include(f => f.FlightLegs)
+                            .ThenInclude(fl => fl.ArriveAirport)
+                        .Include(f => f.FlightLegs)
+                            .ThenInclude(fl => fl.AirplaneModel)
+                        .Include(f => f.FlightLegs)
+                            .ThenInclude(fl => fl.AirLine)
+                        .Where(f =>
+                            f.FlightLegs
                             .AsQueryable()
-                            .Where(fl => fl.Direction == Direction.Back)
-                            .OrderByDescending(fl => fl.LegNumber)
-                            .Take(1)
-                            .Any(fl => fl.ArriveDate == model.ReturnDate))
-                    .ToList();
+                            .Any(fl =>
+                                fl.Direction == Direction.Forth
+                                && fl.LegNumber == 1
+                                && (fl.DepartAirport.Name == model.DepartureAirport
+                                    || fl.DepartAirport.IATA == model.DepartureAirport)
+                                && fl.DepartDate == model.DepartDate)
+                            && f.FlightLegs
+                                .AsQueryable()
+                                .Where(fl => fl.Direction == Direction.Forth)
+                                .OrderByDescending(fl => fl.LegNumber)
+                                .Take(1)
+                                .Any(fl =>
+                                    fl.ArriveAirport.Name == model.DestinationAirport
+                                    || fl.ArriveAirport.IATA == model.DestinationAirport)
+                            && f.FlightLegs
+                                .AsQueryable()
+                                .Where(fl => fl.Direction == Direction.Back)
+                                .OrderByDescending(fl => fl.LegNumber)
+                                .Take(1)
+                                .Any(fl => fl.ArriveDate == model.ReturnDate))
+                        .ToList();
+                    break;
+                default:
+                    result = null;
+                    break;
             }
 
             return result;
