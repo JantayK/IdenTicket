@@ -212,6 +212,26 @@ namespace IdenTicket.Data
                         CountryId = context.Countries.FirstOrDefault(c => c.Name == "Казахстан").Id,
                         Name = "Nur-Sultan"
                     },
+                    new City
+                    {
+                        CountryId = context.Countries.FirstOrDefault(c => c.Name == "Польша").Id,
+                        Name = "Warsaw"
+                    },
+                    new City
+                    {
+                        CountryId = context.Countries.FirstOrDefault(c => c.Name == "Польша").Id,
+                        Name = "Katowice"
+                    },
+                    new City
+                    {
+                        CountryId = context.Countries.FirstOrDefault(c => c.Name == "Украина").Id,
+                        Name = "Kyiv"
+                    },
+                    new City
+                    {
+                        CountryId = context.Countries.FirstOrDefault(c => c.Name == "Украина").Id,
+                        Name = "Kharkiv"
+                    },
                 };
                 context.Cities.AddRange(cities);
                 context.SaveChanges();
@@ -275,12 +295,36 @@ namespace IdenTicket.Data
                         Name = "Международный аэропорт имени Ататюрка",
                         IATA = "IST"
                     },
-                        new Airport()
+                    new Airport()
                     {
                         CityId = context.Cities.FirstOrDefault(c => c.Name == "Almaty").Id,
-                        Name = "Международный Аэропорт «Алматы»",
+                        Name = "Международный Аэропорт Алматы",
                         IATA = "ALA"
                     },
+                    new Airport()
+                    {
+                        CityId = context.Cities.FirstOrDefault(c => c.Name == "Warsaw").Id,
+                        Name = "Международный аэропорт Варшава-Модлин",
+                        IATA = "WMI"
+                    },
+                    new Airport()
+                    {
+                        CityId = context.Cities.FirstOrDefault(c => c.Name == "Katowice").Id,
+                        Name = "Международный аэропорт Катовице-Пыжовице",
+                        IATA = "KTW"
+                    },
+                    new Airport()
+                    {
+                        CityId = context.Cities.FirstOrDefault(c => c.Name == "Kyiv").Id,
+                        Name = "Киев Борисполь",
+                        IATA = "KBP"
+                    },
+                    new Airport()
+                    {
+                        CityId = context.Cities.FirstOrDefault(c => c.Name == "Kharkiv").Id,
+                        Name = "Аэропорт Харьков",
+                        IATA = "HRK"
+                    }
                 };
                 context.Airports.AddRange(airports);
                 context.SaveChanges();
@@ -329,7 +373,7 @@ namespace IdenTicket.Data
                         AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Air Astana").Id,
                         AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Boeing 747").Id,
                         DepartAirportId = context.Airports.FirstOrDefault(d => d.Name == "Manas International Airport").Id,
-                        ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.Name == "Международный Аэропорт «Алматы»").Id,
+                        ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.Name == "Международный Аэропорт Алматы").Id,
                         DepartDate = new DateTime(2022, 06, 16),
                         ArriveDate = new DateTime(2022, 06, 16),
                     },
@@ -357,102 +401,150 @@ namespace IdenTicket.Data
                         DepartDate = new DateTime(2022, 09, 1),
                         ArriveDate = new DateTime(2022, 09, 2),
                     },
-                    //new FlightLeg()
-                    //{
-                    //    FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.DirectOneWay).Id,
-                    //    Direction = Direction.Forth,
-                    //    LegNumber = 1,
-                    //    AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Air Astana").Id,
-                    //    AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Boeing 747").Id,
-                    //    DepartAirportId = context.Airports.FirstOrDefault(d => d.Name == "Manas International Airport").Id,
-                    //    ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.Name == "Международный Аэропорт «Алматы»").Id,
-                    //    DepartDate = new DateTime(2022, 06, 16),
-                    //    ArriveDate = new DateTime(2022, 08, 20),
-                    //},
-                    //new FlightLeg()
-                    //{
-                    //    FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.DirectOneWay).Id,
-                    //    Direction = Direction.Forth,
-                    //    LegNumber = 1,
-                    //    AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Air Astana").Id,
-                    //    AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Boeing 747").Id,
-                    //    DepartAirportId = context.Airports.FirstOrDefault(d => d.Name == "Manas International Airport").Id,
-                    //    ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.Name == "Международный Аэропорт «Алматы»").Id,
-                    //    DepartDate = new DateTime(2022, 06, 16),
-                    //    ArriveDate = new DateTime(2022, 08, 20),
-                    //},
-                    //new FlightLeg()
-                    //{
-                    //    FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.DirectOneWay).Id,
-                    //    Direction = Direction.Forth,
-                    //    LegNumber = 1,
-                    //    AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Air Astana").Id,
-                    //    AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Boeing 747").Id,
-                    //    DepartAirportId = context.Airports.FirstOrDefault(d => d.Name == "Manas International Airport").Id,
-                    //    ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.Name == "Международный Аэропорт «Алматы»").Id,
-                    //    DepartDate = new DateTime(2022, 06, 16),
-                    //    ArriveDate = new DateTime(2022, 08, 20),
-                    //},
-                    //new FlightLeg()
-                    //{
-                    //    FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.DirectOneWay).Id,
-                    //    Direction = Direction.Forth,
-                    //    LegNumber = 1,
-                    //    AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Air Astana").Id,
-                    //    AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Boeing 747").Id,
-                    //    DepartAirportId = context.Airports.FirstOrDefault(d => d.Name == "Manas International Airport").Id,
-                    //    ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.Name == "Международный Аэропорт «Алматы»").Id,
-                    //    DepartDate = new DateTime(2022, 06, 16),
-                    //    ArriveDate = new DateTime(2022, 08, 20),
-                    //},
-                    //new FlightLeg()
-                    //{
-                    //    FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.DirectOneWay).Id,
-                    //    Direction = Direction.Forth,
-                    //    LegNumber = 1,
-                    //    AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Air Astana").Id,
-                    //    AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Boeing 747").Id,
-                    //    DepartAirportId = context.Airports.FirstOrDefault(d => d.Name == "Manas International Airport").Id,
-                    //    ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.Name == "Международный Аэропорт «Алматы»").Id,
-                    //    DepartDate = new DateTime(2022, 06, 16),
-                    //    ArriveDate = new DateTime(2022, 08, 20),
-                    //},
-                    //new FlightLeg()
-                    //{
-                    //    FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.DirectOneWay).Id,
-                    //    Direction = Direction.Forth,
-                    //    LegNumber = 1,
-                    //    AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Air Astana").Id,
-                    //    AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Boeing 747").Id,
-                    //    DepartAirportId = context.Airports.FirstOrDefault(d => d.Name == "Manas International Airport").Id,
-                    //    ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.Name == "Международный Аэропорт «Алматы»").Id,
-                    //    DepartDate = new DateTime(2022, 06, 16),
-                    //    ArriveDate = new DateTime(2022, 08, 20),
-                    //},
-                    //new FlightLeg()
-                    //{
-                    //    FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.DirectOneWay).Id,
-                    //    Direction = Direction.Forth,
-                    //    LegNumber = 1,
-                    //    AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Air Astana").Id,
-                    //    AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Boeing 747").Id,
-                    //    DepartAirportId = context.Airports.FirstOrDefault(d => d.Name == "Manas International Airport").Id,
-                    //    ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.Name == "Международный Аэропорт «Алматы»").Id,
-                    //    DepartDate = new DateTime(2022, 06, 16),
-                    //    ArriveDate = new DateTime(2022, 08, 20),
-                    //},
-                    //new FlightLeg()
-                    //{
-                    //    FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.DirectOneWay).Id,
-                    //    Direction = Direction.Forth,
-                    //    LegNumber = 1,
-                    //    AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Air Astana").Id,
-                    //    AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Boeing 747").Id,
-                    //    DepartAirportId = context.Airports.FirstOrDefault(d => d.Name == "Manas International Airport").Id,
-                    //    ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.Name == "Международный Аэропорт «Алматы»").Id,
-                    //    DepartDate = new DateTime(2022, 06, 16),
-                    //    ArriveDate = new DateTime(2022, 08, 20),
-                    //},
+                    new FlightLeg()
+                    {
+                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.TransferOneWay).Id,
+                        Direction = Direction.Forth,
+                        LegNumber = 1,
+                        AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Газпром Авиа").Id,
+                        AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Airbus A350").Id,
+                        DepartAirportId = context.Airports.FirstOrDefault(d => d.IATA == "FRU").Id,
+                        ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "SVO").Id,
+                        DepartDate = new DateTime(2022, 06, 17),
+                        ArriveDate = new DateTime(2022, 06, 17),
+                    },
+                    new FlightLeg()
+                    {
+                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.TransferOneWay).Id,
+                        Direction = Direction.Forth,
+                        LegNumber = 2,
+                        AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Газпром Авиа").Id,
+                        AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Boeing 747").Id,
+                        DepartAirportId = context.Airports.FirstOrDefault(d => d.IATA == "SVO").Id,
+                        ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "WMI").Id,
+                        DepartDate = new DateTime(2022, 06, 18),
+                        ArriveDate = new DateTime(2022, 08, 18),
+                    },
+                    new FlightLeg()
+                    {
+                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.TransferWithReturn).Id,
+                        Direction = Direction.Forth,
+                        LegNumber = 1,
+                        AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "МАУ").Id,
+                        AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Boeing 777").Id,
+                        DepartAirportId = context.Airports.FirstOrDefault(d => d.Name == "Manas International Airport").Id,
+                        ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "HRK" ).Id,
+                        DepartDate = new DateTime(2022, 06, 18),
+                        ArriveDate = new DateTime(2022, 06, 18),
+                    },
+                    new FlightLeg()
+                    {
+                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.TransferWithReturn).Id,
+                        Direction = Direction.Forth,
+                        LegNumber = 2,
+                        AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "МАУ").Id,
+                        AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Airbus A350").Id,
+                        DepartAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "HRK" ).Id,
+                        ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "KTW" ).Id,
+                        DepartDate = new DateTime(2022, 06, 18),
+                        ArriveDate = new DateTime(2022, 06, 18),
+                    },
+                    new FlightLeg()
+                    {
+                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.TransferWithReturn).Id,
+                        Direction = Direction.Back,
+                        LegNumber = 1,
+                        AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Аэрофлот").Id,
+                        AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Airbus A350").Id,
+                        DepartAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "KTW" ).Id,
+                        ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "SVO" ).Id,
+                        DepartDate = new DateTime(2022, 08, 10),
+                        ArriveDate = new DateTime(2022, 08, 10),
+                    },
+                    new FlightLeg()
+                    {
+                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.TransferWithReturn).Id,
+                        Direction = Direction.Back,
+                        LegNumber = 2,
+                        AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Аэрофлот").Id,
+                        AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Boeing 777").Id,
+                        DepartAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "SVO" ).Id,
+                        ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "FRU" ).Id,
+                        DepartDate = new DateTime(2022, 08, 11),
+                        ArriveDate = new DateTime(2022, 08, 11),
+                    },
+                    new FlightLeg()
+                    {
+                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.TransitOneWay).Id,
+                        Direction = Direction.Forth,
+                        LegNumber = 1,
+                        AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Avia Traffic Company").Id,
+                        AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Airbus A319neo").Id,
+                        DepartAirportId = context.Airports.FirstOrDefault(d => d.Name == "Manas International Airport").Id,
+                        ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "HRK").Id,
+                        DepartDate = new DateTime(2022, 08, 17),
+                        ArriveDate = new DateTime(2022, 08, 17),
+                    },
+                    new FlightLeg()
+                    {
+                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.TransitOneWay).Id,
+                        Direction = Direction.Forth,
+                        LegNumber = 2,
+                        AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Avia Traffic Company").Id,
+                        AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Airbus A319neo").Id,
+                        DepartAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "HRK").Id,
+                        ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "WMI").Id,
+                        DepartDate = new DateTime(2022, 08, 18),
+                        ArriveDate = new DateTime(2022, 08, 18),
+                    },
+                    new FlightLeg()
+                    {
+                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.TransitWithReturn).Id,
+                        Direction = Direction.Forth,
+                        LegNumber = 1,
+                        AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Air Astana").Id,
+                        AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Суперджет-100").Id,
+                        DepartAirportId = context.Airports.FirstOrDefault(d => d.Name == "Manas International Airport").Id,
+                        ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.Name == "Международный Аэропорт Алматы").Id,
+                        DepartDate = new DateTime(2022, 06, 20),
+                        ArriveDate = new DateTime(2022, 06, 20),
+                    },
+                    new FlightLeg()
+                    {
+                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.TransitWithReturn).Id,
+                        Direction = Direction.Forth,
+                        LegNumber = 2,
+                        AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Air Astana").Id,
+                        AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Суперджет-100").Id,
+                        DepartAirportId = context.Airports.FirstOrDefault(d => d.Name == "Международный Аэропорт Алматы").Id,
+                        ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.Name == "Аэропорт Домодедово").Id,
+                        DepartDate = new DateTime(2022, 06, 20),
+                        ArriveDate = new DateTime(2022, 06, 20),
+                    },
+                    new FlightLeg()
+                    {
+                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.TransitWithReturn).Id,
+                        Direction = Direction.Back,
+                        LegNumber = 1,
+                        AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Air Astana").Id,
+                        AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Суперджет-100").Id,
+                        DepartAirportId = context.Airports.FirstOrDefault(d => d.Name == "Аэропорт Домодедово").Id,
+                        ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.Name == "Международный Аэропорт Алматы").Id,
+                        DepartDate = new DateTime(2022, 10, 20),
+                        ArriveDate = new DateTime(2022, 10, 20),
+                    },
+                    new FlightLeg()
+                    {
+                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.TransitWithReturn).Id,
+                        Direction = Direction.Back,
+                        LegNumber = 2,
+                        AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Air Astana").Id,
+                        AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Суперджет-100").Id,
+                        DepartAirportId = context.Airports.FirstOrDefault(d => d.Name == "Международный Аэропорт Алматы").Id,
+                        ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "FRU").Id,
+                        DepartDate = new DateTime(2022, 10, 21),
+                        ArriveDate = new DateTime(2022, 10, 21),
+                    },
                 };
                 context.FlightLegs.AddRange(flightlegs);
                 context.SaveChanges();
