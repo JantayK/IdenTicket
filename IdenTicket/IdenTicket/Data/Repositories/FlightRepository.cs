@@ -61,9 +61,9 @@ namespace IdenTicket.Data.Repositories
                             f.FlightLegs
                             .AsQueryable()
                             .Any(fl =>
-                                ((fl.ArriveAirport.Name == model.DestinationAirport
+                                ((fl.ArriveAirport.Name.Contains(model.DestinationAirport)
                                     || fl.ArriveAirport.IATA == model.DestinationAirport)
-                                && fl.DepartAirport.Name == model.DepartureAirport
+                                && fl.DepartAirport.Name.Contains(model.DepartureAirport)
                                     || fl.DepartAirport.IATA == model.DepartureAirport)
                                 && fl.DepartDate.Date == model.DepartDate.Date))
                         .ToList();
@@ -85,9 +85,9 @@ namespace IdenTicket.Data.Repositories
                             f.FlightLegs
                             .AsQueryable()
                             .Any(fl => fl.Direction == Direction.Forth
-                                && (fl.DepartAirport.Name == model.DepartureAirport
+                                && (fl.DepartAirport.Name.Contains(model.DepartureAirport)
                                     || fl.DepartAirport.IATA == model.DepartureAirport)
-                                && (fl.ArriveAirport.Name == model.DestinationAirport
+                                && (fl.ArriveAirport.Name.Contains(model.DestinationAirport)
                                     || fl.ArriveAirport.IATA == model.DestinationAirport)
                                 && fl.DepartDate.Date == model.DepartDate.Date)
                             && f.FlightLegs
@@ -114,7 +114,7 @@ namespace IdenTicket.Data.Repositories
                             .Any(fl =>
                                 fl.Direction == Direction.Forth
                                 && fl.LegNumber == 1
-                                && (fl.DepartAirport.Name == model.DepartureAirport
+                                && (fl.DepartAirport.Name.Contains(model.DepartureAirport)
                                     || fl.DepartAirport.IATA == model.DepartureAirport)
                                 && fl.DepartDate == model.DepartDate)
                             && f.FlightLegs
@@ -123,7 +123,7 @@ namespace IdenTicket.Data.Repositories
                                 .OrderByDescending(fl => fl.LegNumber)
                                 .Take(1)
                                 .Any(fl =>
-                                    fl.ArriveAirport.Name == model.DestinationAirport
+                                    fl.ArriveAirport.Name.Contains(model.DestinationAirport)
                                     || fl.ArriveAirport.IATA == model.DestinationAirport))
                         .ToList();
                     break;
@@ -147,7 +147,7 @@ namespace IdenTicket.Data.Repositories
                             .Any(fl =>
                                 fl.Direction == Direction.Forth
                                 && fl.LegNumber == 1
-                                && (fl.DepartAirport.Name == model.DepartureAirport
+                                && (fl.DepartAirport.Name.Contains(model.DepartureAirport)
                                     || fl.DepartAirport.IATA == model.DepartureAirport)
                                 && fl.DepartDate.Date == model.DepartDate.Date)
                             && f.FlightLegs
@@ -156,7 +156,7 @@ namespace IdenTicket.Data.Repositories
                                 .OrderByDescending(fl => fl.LegNumber)
                                 .Take(1)
                                 .Any(fl =>
-                                    fl.ArriveAirport.Name == model.DestinationAirport
+                                    fl.ArriveAirport.Name.Contains(model.DestinationAirport)
                                     || fl.ArriveAirport.IATA == model.DestinationAirport)
                             && f.FlightLegs
                                 .AsQueryable()
