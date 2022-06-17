@@ -18,9 +18,11 @@ namespace IdenTicket.ViewModels
         [Display(Name = "Аэропорт прибытия")]
         public string DestinationAirport { get; set; }
 
+        [DataType(DataType.Date)]
         [Display(Name = "Дата отбытия")]
         public DateTime DepartDate { get; set; }
 
+        [DataType(DataType.Date)]
         [Display(Name = "Дата возврата")]
         public DateTime? ReturnDate { get; set; }
 

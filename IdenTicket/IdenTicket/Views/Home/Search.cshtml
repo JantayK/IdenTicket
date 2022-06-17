@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Flight>
+
+@{
+}
+
+@if (Model.Any())
+{
+    <p>@Model.FirstOrDefault().FlightLegs.FirstOrDefault().AirplaneModel.Model</p>
+}
+else
+{
+    <p>Рейсы не найдены!</p>
+}

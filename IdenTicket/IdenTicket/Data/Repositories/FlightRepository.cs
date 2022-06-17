@@ -65,10 +65,12 @@ namespace IdenTicket.Data.Repositories
                                     || fl.ArriveAirport.IATA == model.DestinationAirport)
                                 && fl.DepartAirport.Name == model.DepartureAirport
                                     || fl.DepartAirport.IATA == model.DepartureAirport)
-                                && fl.DepartDate == model.DepartDate))
+                                && fl.DepartDate.Date == model.DepartDate.Date))
                         .ToList();
                     break;
                 case FlightType.DirectWithReturn:
+                    if (!model.ReturnDate.HasValue)
+                        throw new ArgumentNullException("Дата возврата не может быть пустой");
                     result = _context.Flights
                         .AsQueryable()
                         .Include(f => f.FlightLegs)
@@ -87,15 +89,11 @@ namespace IdenTicket.Data.Repositories
                                     || fl.DepartAirport.IATA == model.DepartureAirport)
                                 && (fl.ArriveAirport.Name == model.DestinationAirport
                                     || fl.ArriveAirport.IATA == model.DestinationAirport)
-                                && fl.DepartDate == model.DepartDate)
+                                && fl.DepartDate.Date == model.DepartDate.Date)
                             && f.FlightLegs
                                 .AsQueryable()
                                 .Any(fl => fl.Direction == Direction.Back
-                                && (fl.DepartAirport.Name == model.DepartureAirport
-                                    || fl.DepartAirport.IATA == model.DepartureAirport)
-                                && (fl.ArriveAirport.Name == model.DestinationAirport
-                                    || fl.ArriveAirport.IATA == model.DestinationAirport)
-                                && fl.DepartDate == model.DepartDate))
+                                && fl.ArriveDate.Date == ((DateTime)model.ReturnDate).Date))
                         .ToList();
                     break;
                 case FlightType.TransitOneWay:
@@ -131,6 +129,8 @@ namespace IdenTicket.Data.Repositories
                     break;
                 case FlightType.TransitWithReturn:
                 case FlightType.TransferWithReturn:
+                    if (!model.ReturnDate.HasValue)
+                        throw new ArgumentNullException("Дата возврата не может быть пустой");
                     result = _context.Flights
                         .AsQueryable()
                         .Include(f => f.FlightLegs)
@@ -149,7 +149,7 @@ namespace IdenTicket.Data.Repositories
                                 && fl.LegNumber == 1
                                 && (fl.DepartAirport.Name == model.DepartureAirport
                                     || fl.DepartAirport.IATA == model.DepartureAirport)
-                                && fl.DepartDate == model.DepartDate)
+                                && fl.DepartDate.Date == model.DepartDate.Date)
                             && f.FlightLegs
                                 .AsQueryable()
                                 .Where(fl => fl.Direction == Direction.Forth)
@@ -163,7 +163,7 @@ namespace IdenTicket.Data.Repositories
                                 .Where(fl => fl.Direction == Direction.Back)
                                 .OrderByDescending(fl => fl.LegNumber)
                                 .Take(1)
-                                .Any(fl => fl.ArriveDate == model.ReturnDate))
+                                .Any(fl => fl.ArriveDate.Date == ((DateTime)model.ReturnDate).Date))
                         .ToList();
                     break;
                 default:
