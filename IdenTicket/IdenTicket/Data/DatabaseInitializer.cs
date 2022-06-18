@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using IdenTicket.Enums;
 using IdenTicket.Models;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace IdenTicket.Data
 {
@@ -15,6 +13,8 @@ namespace IdenTicket.Data
     {
         public static void Seed(this ApplicationDbContext context)
         {
+            var rnd = new Random();
+
             if (!context.Countries.Any())
             {
                 var countries = new List<Country>
@@ -374,8 +374,8 @@ namespace IdenTicket.Data
                         AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Boeing 747").Id,
                         DepartAirportId = context.Airports.FirstOrDefault(d => d.Name == "Manas International Airport").Id,
                         ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.Name == "Международный Аэропорт Алматы").Id,
-                        DepartDate = new DateTime(2022, 06, 16),
-                        ArriveDate = new DateTime(2022, 06, 16),
+                        DepartDate = new DateTime(2022, 06, 16).AddSeconds(rnd.Next(1, 86399)),
+                        ArriveDate = new DateTime(2022, 06, 16).AddSeconds(rnd.Next(1, 86399)),
                     },
                     new FlightLeg()
                     {
@@ -386,8 +386,8 @@ namespace IdenTicket.Data
                         AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Суперджет-100").Id,
                         DepartAirportId = context.Airports.FirstOrDefault(d => d.Name == "Manas International Airport").Id,
                         ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.Name == "Osh Airport").Id,
-                        DepartDate = new DateTime(2022, 06, 19),
-                        ArriveDate = new DateTime(2022, 06, 20),
+                        DepartDate = new DateTime(2022, 06, 19).AddSeconds(rnd.Next(1, 86399)),
+                        ArriveDate = new DateTime(2022, 06, 20).AddSeconds(rnd.Next(1, 86399)),
                     },
                     new FlightLeg()
                     {
@@ -398,8 +398,8 @@ namespace IdenTicket.Data
                         AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Суперджет-100").Id,
                         DepartAirportId = context.Airports.FirstOrDefault(d => d.Name == "Osh Airport").Id,
                         ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.Name == "Manas International Airport").Id,
-                        DepartDate = new DateTime(2022, 09, 1),
-                        ArriveDate = new DateTime(2022, 09, 2),
+                        DepartDate = new DateTime(2022, 09, 1).AddSeconds(rnd.Next(1, 86399)),
+                        ArriveDate = new DateTime(2022, 09, 2).AddSeconds(rnd.Next(1, 86399)),
                     },
                     new FlightLeg()
                     {
@@ -410,8 +410,8 @@ namespace IdenTicket.Data
                         AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Airbus A350").Id,
                         DepartAirportId = context.Airports.FirstOrDefault(d => d.IATA == "FRU").Id,
                         ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "SVO").Id,
-                        DepartDate = new DateTime(2022, 06, 17),
-                        ArriveDate = new DateTime(2022, 06, 17),
+                        DepartDate = new DateTime(2022, 06, 17).AddSeconds(rnd.Next(1, 86399)),
+                        ArriveDate = new DateTime(2022, 06, 17).AddSeconds(rnd.Next(1, 86399)),
                     },
                     new FlightLeg()
                     {
@@ -422,8 +422,8 @@ namespace IdenTicket.Data
                         AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Boeing 747").Id,
                         DepartAirportId = context.Airports.FirstOrDefault(d => d.IATA == "SVO").Id,
                         ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "WMI").Id,
-                        DepartDate = new DateTime(2022, 06, 18),
-                        ArriveDate = new DateTime(2022, 08, 18),
+                        DepartDate = new DateTime(2022, 06, 18).AddSeconds(rnd.Next(1, 86399)),
+                        ArriveDate = new DateTime(2022, 08, 18).AddSeconds(rnd.Next(1, 86399)),
                     },
                     new FlightLeg()
                     {
@@ -434,8 +434,8 @@ namespace IdenTicket.Data
                         AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Boeing 777").Id,
                         DepartAirportId = context.Airports.FirstOrDefault(d => d.Name == "Manas International Airport").Id,
                         ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "HRK" ).Id,
-                        DepartDate = new DateTime(2022, 06, 18),
-                        ArriveDate = new DateTime(2022, 06, 18),
+                        DepartDate = new DateTime(2022, 06, 18).AddSeconds(rnd.Next(1, 86399)),
+                        ArriveDate = new DateTime(2022, 06, 18).AddSeconds(rnd.Next(1, 86399)),
                     },
                     new FlightLeg()
                     {
@@ -446,8 +446,8 @@ namespace IdenTicket.Data
                         AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Airbus A350").Id,
                         DepartAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "HRK" ).Id,
                         ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "KTW" ).Id,
-                        DepartDate = new DateTime(2022, 06, 18),
-                        ArriveDate = new DateTime(2022, 06, 18),
+                        DepartDate = new DateTime(2022, 06, 18).AddSeconds(rnd.Next(1, 86399)),
+                        ArriveDate = new DateTime(2022, 06, 18).AddSeconds(rnd.Next(1, 86399)),
                     },
                     new FlightLeg()
                     {
@@ -458,8 +458,8 @@ namespace IdenTicket.Data
                         AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Airbus A350").Id,
                         DepartAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "KTW" ).Id,
                         ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "SVO" ).Id,
-                        DepartDate = new DateTime(2022, 08, 10),
-                        ArriveDate = new DateTime(2022, 08, 10),
+                        DepartDate = new DateTime(2022, 08, 10).AddSeconds(rnd.Next(1, 86399)),
+                        ArriveDate = new DateTime(2022, 08, 10).AddSeconds(rnd.Next(1, 86399)),
                     },
                     new FlightLeg()
                     {
@@ -470,8 +470,8 @@ namespace IdenTicket.Data
                         AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Boeing 777").Id,
                         DepartAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "SVO" ).Id,
                         ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "FRU" ).Id,
-                        DepartDate = new DateTime(2022, 08, 11),
-                        ArriveDate = new DateTime(2022, 08, 11),
+                        DepartDate = new DateTime(2022, 08, 11).AddSeconds(rnd.Next(1, 86399)),
+                        ArriveDate = new DateTime(2022, 08, 11).AddSeconds(rnd.Next(1, 86399)),
                     },
                     new FlightLeg()
                     {
@@ -482,8 +482,8 @@ namespace IdenTicket.Data
                         AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Airbus A319neo").Id,
                         DepartAirportId = context.Airports.FirstOrDefault(d => d.Name == "Manas International Airport").Id,
                         ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "HRK").Id,
-                        DepartDate = new DateTime(2022, 08, 17),
-                        ArriveDate = new DateTime(2022, 08, 17),
+                        DepartDate = new DateTime(2022, 08, 17).AddSeconds(rnd.Next(1, 86399)),
+                        ArriveDate = new DateTime(2022, 08, 17).AddSeconds(rnd.Next(1, 86399)),
                     },
                     new FlightLeg()
                     {
@@ -494,8 +494,8 @@ namespace IdenTicket.Data
                         AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Airbus A319neo").Id,
                         DepartAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "HRK").Id,
                         ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "WMI").Id,
-                        DepartDate = new DateTime(2022, 08, 18),
-                        ArriveDate = new DateTime(2022, 08, 18),
+                        DepartDate = new DateTime(2022, 08, 18).AddSeconds(rnd.Next(1, 86399)),
+                        ArriveDate = new DateTime(2022, 08, 18).AddSeconds(rnd.Next(1, 86399)),
                     },
                     new FlightLeg()
                     {
@@ -506,8 +506,8 @@ namespace IdenTicket.Data
                         AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Суперджет-100").Id,
                         DepartAirportId = context.Airports.FirstOrDefault(d => d.Name == "Manas International Airport").Id,
                         ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.Name == "Международный Аэропорт Алматы").Id,
-                        DepartDate = new DateTime(2022, 06, 20),
-                        ArriveDate = new DateTime(2022, 06, 20),
+                        DepartDate = new DateTime(2022, 06, 20).AddSeconds(rnd.Next(1, 86399)),
+                        ArriveDate = new DateTime(2022, 06, 20).AddSeconds(rnd.Next(1, 86399)),
                     },
                     new FlightLeg()
                     {
@@ -518,8 +518,8 @@ namespace IdenTicket.Data
                         AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Суперджет-100").Id,
                         DepartAirportId = context.Airports.FirstOrDefault(d => d.Name == "Международный Аэропорт Алматы").Id,
                         ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.Name == "Аэропорт Домодедово").Id,
-                        DepartDate = new DateTime(2022, 06, 20),
-                        ArriveDate = new DateTime(2022, 06, 20),
+                        DepartDate = new DateTime(2022, 06, 20).AddSeconds(rnd.Next(1, 86399)),
+                        ArriveDate = new DateTime(2022, 06, 20).AddSeconds(rnd.Next(1, 86399)),
                     },
                     new FlightLeg()
                     {
@@ -530,8 +530,8 @@ namespace IdenTicket.Data
                         AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Суперджет-100").Id,
                         DepartAirportId = context.Airports.FirstOrDefault(d => d.Name == "Аэропорт Домодедово").Id,
                         ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.Name == "Международный Аэропорт Алматы").Id,
-                        DepartDate = new DateTime(2022, 10, 20),
-                        ArriveDate = new DateTime(2022, 10, 20),
+                        DepartDate = new DateTime(2022, 10, 20).AddSeconds(rnd.Next(1, 86399)),
+                        ArriveDate = new DateTime(2022, 10, 20).AddSeconds(rnd.Next(1, 86399)),
                     },
                     new FlightLeg()
                     {
@@ -542,8 +542,8 @@ namespace IdenTicket.Data
                         AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Суперджет-100").Id,
                         DepartAirportId = context.Airports.FirstOrDefault(d => d.Name == "Международный Аэропорт Алматы").Id,
                         ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "FRU").Id,
-                        DepartDate = new DateTime(2022, 10, 21),
-                        ArriveDate = new DateTime(2022, 10, 21),
+                        DepartDate = new DateTime(2022, 10, 21).AddSeconds(rnd.Next(1, 86399)),
+                        ArriveDate = new DateTime(2022, 10, 21).AddSeconds(rnd.Next(1, 86399)),
                     },
                 };
                 context.FlightLegs.AddRange(flightlegs);

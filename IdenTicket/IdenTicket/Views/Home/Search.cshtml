@@ -1,13 +1,168 @@
-﻿@model IEnumerable<Flight>
+﻿@model (IEnumerable<Flight>, SearchViewModel)
 
 @{
+    IQueryable<FlightLeg> leg;
+    TimeSpan flightTime;
+    int hours, minutes;
 }
 
-@if (Model.Any())
+<div class="d-flex flex-column justify-content-center" style="height: 120px;">
+    <partial name="_SearchPartial" model="Model.Item2" />
+</div>
+@if (Model.Item1.Any())
 {
-    <p>@Model.FirstOrDefault().FlightLegs.FirstOrDefault().AirplaneModel.Model</p>
+    <div class="d-flex flex-column flex-nowrap">
+        @foreach (var flight in Model.Item1)
+        {
+            <div class="d-flex flex-row">
+                <div class="d-flex flex-column justify-content-around shadow" style="width: 70%; min-height: 100px">
+                    <div class="d-flex flex-row box-primary">
+                        @{
+                            leg = flight.FlightLegs.AsQueryable()
+                                .Where(fl => fl.Direction == Direction.Forth
+                                    && fl.LegNumber == 1);
+                        }
+                        <div class="d-flex flex-column justify-content-center" style="width: 15%; padding-left: 25px;">
+                            <span> Авиалиния: <br /> @leg.Select(fl => fl.AirLine.Name).FirstOrDefault() </span>
+                        </div>
+                        <div class="d-flex flex-column justify-content-center" style="width: 10%; min-width: 85px;">
+                            <div class="d-flex flex-column">
+                                <div class="d-flex justify-content-end">@leg.Select(fl => fl.DepartDate.ToShortTimeString()).SingleOrDefault()</div>
+                                <div class="d-flex justify-content-end">@leg.Select(fl => fl.DepartAirport.IATA).SingleOrDefault()</div>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column line">
+                            <div class="d-flex flex-row justify-content-around top">
+                                @for (var i = 0; i < flight.FlightLegs.Where(fl => fl.Direction == Direction.Forth).Count() - 1; i++)
+                                {
+                                    <div class="d-flex flex-column justify-content-end">
+                                        <div class="leg-dot"></div>
+                                    </div>
+                                }
+                            </div>
+                            
+                            <div class="d-flex flex-row justify-content-around bottom">
+                                @if (@flight.FlightLegs.Where(fl => fl.Direction == Direction.Forth).Count() < 2)
+                                {
+                                    <div class="d-flex flex-column justify-content-end"><span>(без остановок)</span></div>
+                                }
+                                @for (var i = 0; i < flight.FlightLegs.Where(fl => fl.Direction == Direction.Forth).Count() - 1; i++)
+                                {
+                                    <div class="d-flex flex-column justify-content-end">
+                                        <span>@flight.FlightLegs.Where(fl => fl.Direction == Direction.Forth).ToList()[i].ArriveAirport.IATA</span>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        @{
+                            leg = flight.FlightLegs.AsQueryable()
+                                .Where(fl => fl.Direction == Direction.Forth
+                                    && fl.LegNumber == flight.FlightLegs
+                                        .Where(fl => fl.Direction == Direction.Forth)
+                                        .Max(fl => fl.LegNumber));
+                        }
+                        <div class="d-flex flex-column justify-content-center" style="width: 10%; min-width: 85px;">
+                            <div class="d-flex flex-column">
+                                <div class="d-flex justify-content-start">@leg.Select(fl => fl.ArriveDate.ToShortTimeString()).SingleOrDefault()</div>
+                                <div class="d-flex justify-content-start">@leg.Select(fl => fl.ArriveAirport.IATA).SingleOrDefault()</div>
+                            </div>
+                        </div>
+                        @{
+                            var departDate = flight.FlightLegs.AsQueryable()
+                                .Where(fl => fl.Direction == Direction.Forth
+                                    && fl.LegNumber == 1)
+                                .Select(fl => fl.DepartDate).SingleOrDefault();
+                            var arriveDate = leg.Select(fl => fl.ArriveDate).SingleOrDefault();
+                            flightTime = arriveDate - departDate;
+                            hours = (flightTime.Hours + 24) % 24;
+                            minutes = (flightTime.Minutes + 60) % 60;
+                        }
+                        <div class="d-flex flex-column justify-content-center" style="width: 15%; min-width: 85px;">
+                            <span>@hours ч @minutes мин</span>
+                        </div>
+                    </div>
+
+
+
+                    <div class="d-flex flex-row box-primary">
+                        <div class="d-flex flex-column justify-content-center" style="width: 15%; padding-left: 25px">
+                            @{
+                                leg = flight.FlightLegs.AsQueryable()
+                                    .Where(fl => fl.Direction == Direction.Back
+                                        && fl.LegNumber == flight.FlightLegs
+                                            .Where(fl => fl.Direction == Direction.Back)
+                                            .Max(fl => fl.LegNumber));
+                            }
+                            <span><span style="color: dimgray; font-size: 15px">Авиалиния:</span> <br /> @leg.Select(fl => fl.AirLine.Name).FirstOrDefault()</span>
+                        </div>
+                        <div class="d-flex flex-column justify-content-center" style="width: 10%; min-width: 85px;">
+                            <div class="d-flex flex-column">
+                                <div class="d-flex justify-content-end">@leg.Select(fl => fl.ArriveDate.ToShortTimeString()).SingleOrDefault()</div>
+                                <div class="d-flex justify-content-end">@leg.Select(fl => fl.ArriveAirport.IATA).SingleOrDefault()</div>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column line">
+                            <div class="d-flex flex-row justify-content-around top">
+                                @for (var i = 0; i < flight.FlightLegs.Where(fl => fl.Direction == Direction.Back).Count() - 1; i++)
+                                {
+                                    <div class="d-flex flex-column justify-content-end">
+                                        <div class="leg-dot"></div>
+                                    </div>
+                                }
+                            </div>
+                            <div class="d-flex flex-row justify-content-around bottom">
+                                @if (@flight.FlightLegs.Where(fl => fl.Direction == Direction.Back).Count() < 2)
+                                {
+                                    <div class="d-flex flex-column justify-content-end"><span>(без остановок)</span></div>
+                                }
+                                @for (var i = 0; i < flight.FlightLegs.Where(fl => fl.Direction == Direction.Back).Count() - 1; i++)
+                                {
+                                    <div class="d-flex flex-column justify-content-end">
+                                        <span>@flight.FlightLegs.Where(fl => fl.Direction == Direction.Back).ToList()[i].ArriveAirport.IATA</span>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        @{
+                            leg = flight.FlightLegs.AsQueryable()
+                                .Where(fl => fl.Direction == Direction.Back
+                                    && fl.LegNumber == 1);
+                        }
+                        <div class="d-flex flex-column justify-content-center" style="width: 10%; min-width: 85px;">
+                            <div class="d-flex flex-column">
+                                <div class="d-flex justify-content-start">@leg.Select(fl => fl.DepartDate.ToShortTimeString()).SingleOrDefault()</div>
+                                <div class="d-flex justify-content-start">@leg.Select(fl => fl.DepartAirport.IATA).SingleOrDefault()</div>
+                            </div>
+                        </div>
+                        @{
+                            departDate = leg.Select(fl => fl.DepartDate).SingleOrDefault();
+                            arriveDate = flight.FlightLegs.AsQueryable()
+                                .Where(fl => fl.Direction == Direction.Back
+                                    && fl.LegNumber == flight.FlightLegs
+                                        .Where(fl => fl.Direction == Direction.Back)
+                                        .Max(fl => fl.LegNumber))
+                                .Select(fl => fl.ArriveDate).SingleOrDefault();
+                            flightTime = arriveDate - departDate;
+                            hours = (flightTime.Hours + 24) % 24;
+                            minutes = (flightTime.Minutes + 60) % 60;
+                        }
+                        <div class="d-flex flex-column justify-content-center" style="width: 15%; min-width: 85px;">
+                            <span>@hours ч @minutes мин</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="shadow" style="width: 30%">
+                    <div class="d-flex flex-column box-primary" style="height: 100%">
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 }
 else
 {
-    <p>Рейсы не найдены!</p>
+    <div class="d-flex justify-content-center">
+        <p>Рейсы не найдены!</p>
+    </div>
 }
