@@ -352,12 +352,6 @@ namespace IdenTicket.Data
                     },
                     new Airport()
                     {
-                        CityId = context.Cities.FirstOrDefault(c => c.Name == "Dushanbe").Id,
-                        Name = "Аэропорт Душанбе",
-                        IATA = "DYU"
-                    },
-                    new Airport()
-                    {
                         CityId = context.Cities.FirstOrDefault(c => c.Name == "Minsk").Id,
                         Name = "Национальный аэропорт Минск",
                         IATA = "MSQ"
