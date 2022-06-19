@@ -1,4 +1,5 @@
 ﻿using IdenTicket.Enums;
+using IdenTicket.Validation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,17 +13,22 @@ namespace IdenTicket.ViewModels
     /// </summary>
     public class SearchViewModel
     {
+        [Required(ErrorMessage ="Это поле не может быть пустым")]
+        [StringLength(50)]
         [Display(Name = "Аэропорт отбытия")]
         public string DepartureAirport { get; set; }
-
+        [Required(ErrorMessage = "Это поле не может быть пустым")]
+        [StringLength(50)]
         [Display(Name = "Аэропорт прибытия")]
         public string DestinationAirport { get; set; }
 
         [DataType(DataType.Date)]
+        [ValidateDate(ErrorMessage = "Некорректная дата отбытия")]
         [Display(Name = "Дата отбытия")]
         public DateTime DepartDate { get; set; }
 
         [DataType(DataType.Date)]
+        [ValidateDate(ErrorMessage = "Некорректная дата возврата")]
         [Display(Name = "Дата возврата")]
         public DateTime? ReturnDate { get; set; }
 
