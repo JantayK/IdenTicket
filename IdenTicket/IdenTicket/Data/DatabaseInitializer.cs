@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using IdenTicket.Enums;
 using IdenTicket.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace IdenTicket.Data
 {
@@ -64,6 +65,66 @@ namespace IdenTicket.Data
                 context.Countries.AddRange(countries);
                 context.SaveChanges();
             };
+
+            if (!context.Roles.Any())
+            {
+                context.Roles.Add(new IdentityRole("Admin"));
+                context.Roles.Add(new IdentityRole("Customer"));
+                context.SaveChanges();
+            }
+
+            if (!context.Users.Any())
+            {
+                var admin = new IdentityUser()
+                {
+                    UserName = "admin@example.com",
+                    Email = "admin@example.com",
+                    NormalizedUserName = "admin@example.com".ToUpper(),
+                    NormalizedEmail = "admin@example.com".ToUpper(),
+                    // 123456
+                    PasswordHash = "AQAAAAEAACcQAAAAEOGVOZRER3iBs1tePacG4aYJebMqS3Gcmkxxtu546pZ17zoCTTJ0AoSthmA7GNyRlQ=="
+                };
+
+                context.Users.Add(admin);
+            }
+
+            if (!context.Customers.Any())
+            {
+                var customer = new Customer()
+                {
+                    UserName = "customer@example.com",
+                    Email = "customer@example.com",
+                    NormalizedUserName = "customer@example.com".ToUpper(),
+                    NormalizedEmail = "customer@example.com".ToUpper(),
+                    // 123456
+                    PasswordHash = "AQAAAAEAACcQAAAAEOGVOZRER3iBs1tePacG4aYJebMqS3Gcmkxxtu546pZ17zoCTTJ0AoSthmA7GNyRlQ==",
+                    FirstName = "Алим",
+                    LastName = "Богомолец",
+                    CountryId = context.Countries.FirstOrDefault(c => c.Name == "Кыргызстан").Id,
+                    DateOfBirth = new DateTime(1998, 11, 26),
+                    Gender = Gender.Male,
+                    PassportNumber = "xxxxxxx"
+                };
+
+                context.Customers.Add(customer);
+                context.SaveChanges();
+            }
+
+            if (!context.UserRoles.Any())
+            {
+                context.UserRoles.AddRange(
+                    new IdentityUserRole<string>()
+                    {
+                        UserId = context.Users.FirstOrDefault(c => c.NormalizedEmail == "admin@example.com".ToUpper()).Id,
+                        RoleId = context.Roles.FirstOrDefault(c => c.Name == "Admin").Id
+                    },
+                    new IdentityUserRole<string>()
+                    {
+                        UserId = context.Users.FirstOrDefault(c => c.NormalizedEmail == "customer@example.com".ToUpper()).Id,
+                        RoleId = context.Roles.FirstOrDefault(c => c.Name == "Customer").Id
+                    });
+                context.SaveChanges();
+            }
 
             if (!context.AirplaneModels.Any())
             {
@@ -329,7 +390,7 @@ namespace IdenTicket.Data
                 context.Airports.AddRange(airports);
                 context.SaveChanges();
             }
-            if(!context.Flights.Any())
+            if (!context.Flights.Any())
             {
                 var flights = new List<Flight>
                 {
@@ -361,7 +422,7 @@ namespace IdenTicket.Data
                 context.Flights.AddRange(flights);
                 context.SaveChanges();
             }
-            if(!context.FlightLegs.Any())
+            if (!context.FlightLegs.Any())
             {
                 var flightlegs = new List<FlightLeg>
                 {
