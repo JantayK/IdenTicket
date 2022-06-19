@@ -25,6 +25,7 @@ namespace IdenTicket.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+          
             return View(new SearchViewModel() { DepartDate = DateTime.Today });
         }
 
