@@ -1,6 +1,7 @@
 ﻿using IdenTicket.Enums;
 using Microsoft.AspNetCore.Identity;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace IdenTicket.Models
@@ -33,5 +34,6 @@ namespace IdenTicket.Models
         public string PassportNumber { get; set; }
 
         public virtual Country Country { get; set; }
+        public virtual ICollection<SearchLog> SearchLogs { get; set; }
     }
 }
