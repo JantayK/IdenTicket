@@ -9,9 +9,11 @@ namespace IdenTicket.Data
     public class UnitOfWork : IDisposable
     {
         private ApplicationDbContext _context;
+
         private TicketRepository _ticketRepository;
         private FlightRepository _flightRepository;
         private FlightLegRepository _flightLegRepository;
+        private SearchLogRepository _searchLogRepository;
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -45,6 +47,16 @@ namespace IdenTicket.Data
                 if (_flightLegRepository == null)
                     _flightLegRepository = new FlightLegRepository(_context);
                 return _flightLegRepository;
+            }
+        }
+
+        public SearchLogRepository SearchLogs
+        {
+            get
+            {
+                if (_searchLogRepository == null)
+                    _searchLogRepository = new SearchLogRepository(_context);
+                return _searchLogRepository;
             }
         }
 
