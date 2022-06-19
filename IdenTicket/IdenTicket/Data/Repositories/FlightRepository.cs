@@ -119,9 +119,9 @@ namespace IdenTicket.Data.Repositories
                                 && fl.DepartDate == model.DepartDate)
                             && f.FlightLegs
                                 .AsQueryable()
-                                .Where(fl => fl.Direction == Direction.Forth)
-                                .OrderByDescending(fl => fl.LegNumber)
-                                .Take(1)
+                                .Where(fl =>
+                                    fl.Direction == Direction.Forth
+                                    && fl.LegNumber == (f.FlightLegs.Max(fl => (int?)fl.LegNumber) ?? 0))
                                 .Any(fl =>
                                     fl.ArriveAirport.Name.Contains(model.DestinationAirport)
                                     || fl.ArriveAirport.IATA == model.DestinationAirport))
@@ -152,17 +152,17 @@ namespace IdenTicket.Data.Repositories
                                 && fl.DepartDate.Date == model.DepartDate.Date)
                             && f.FlightLegs
                                 .AsQueryable()
-                                .Where(fl => fl.Direction == Direction.Forth)
-                                .OrderByDescending(fl => fl.LegNumber)
-                                .Take(1)
+                                .Where(fl =>
+                                    fl.Direction == Direction.Forth
+                                    && fl.LegNumber == (f.FlightLegs.Max(fl => (int?)fl.LegNumber) ?? 0))
                                 .Any(fl =>
                                     fl.ArriveAirport.Name.Contains(model.DestinationAirport)
                                     || fl.ArriveAirport.IATA == model.DestinationAirport)
                             && f.FlightLegs
                                 .AsQueryable()
-                                .Where(fl => fl.Direction == Direction.Back)
-                                .OrderByDescending(fl => fl.LegNumber)
-                                .Take(1)
+                                .Where(fl =>
+                                    fl.Direction == Direction.Back
+                                    && fl.LegNumber == (f.FlightLegs.Max(fl => (int?)fl.LegNumber) ?? 0))
                                 .Any(fl => fl.ArriveDate.Date == ((DateTime)model.ReturnDate).Date))
                         .ToList();
                     break;

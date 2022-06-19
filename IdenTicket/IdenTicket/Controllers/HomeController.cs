@@ -37,7 +37,7 @@ namespace IdenTicket.Controllers
 
             var result = _uow.Flights.Search(searchViewModel);
 
-            return View("Search", result);
+            return View("Search", (result, searchViewModel));
         }
 
         [HttpGet]
