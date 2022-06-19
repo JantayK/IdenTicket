@@ -25,6 +25,18 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Условия приватности</a>
                         </li>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Customer"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="History" asp-action="History">История поиска</a>
+                            </li>
+                        }
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="History" asp-action="TotalHistory">Секретная информация</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

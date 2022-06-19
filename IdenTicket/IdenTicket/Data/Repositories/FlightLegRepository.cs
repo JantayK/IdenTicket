@@ -47,6 +47,7 @@ namespace IdenTicket.Data.Repositories
         public void Create(FlightLeg item)
         {
             _context.FlightLegs.Add(item);
+            _context.SaveChanges();
         }
 
         /// <summary>
@@ -56,6 +57,7 @@ namespace IdenTicket.Data.Repositories
         public void Update(FlightLeg item)
         {
             _context.Entry(item).State = EntityState.Modified;
+            _context.SaveChanges();
         }
 
         /// <summary>
@@ -68,6 +70,7 @@ namespace IdenTicket.Data.Repositories
             if (flightLeg != null)
             {
                 _context.FlightLegs.Remove(flightLeg);
+                _context.SaveChanges();
             }
         }
     }

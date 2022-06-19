@@ -24,7 +24,7 @@ namespace IdenTicket.Data.Repositories
         /// </summary>
         public IEnumerable<SearchLog> GetAll()
         {
-            return _context.SearchLogs.ToList();
+            return _context.SearchLogs.Include(sl => sl.Customer).ToList();
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace IdenTicket.Data.Repositories
         /// </summary>
         public IEnumerable<SearchLog> GetByCustomerId(string id)
         {
-            return _context.SearchLogs.Where(sl => sl.CustomerId == id).ToList();
+            return _context.SearchLogs.Where(sl => sl.CustomerId == id && !sl.IsDeleted).ToList();
         }
 
         /// <summary>
@@ -50,6 +50,7 @@ namespace IdenTicket.Data.Repositories
         public void Create(SearchLog item)
         {
             _context.SearchLogs.Add(item);
+            _context.SaveChanges();
         }
 
         /// <summary>
@@ -59,18 +60,34 @@ namespace IdenTicket.Data.Repositories
         public void Update(SearchLog item)
         {
             _context.Entry(item).State = EntityState.Modified;
+            _context.SaveChanges();
         }
 
-       /// <summary>
-       /// Удаление записи истории
-       /// </summary>
+        /// <summary>
+        /// Удаление записи истории
+        /// </summary>
         public void Delete(int id)
         {
-            SearchLog searchLog = _context.SearchLogs.Find(id);
-            if(searchLog != null)
+            SearchLog searchLog = _context.SearchLogs.FirstOrDefault(sl => sl.Id == id);
+            if (searchLog != null)
             {
                 _context.SearchLogs.Remove(searchLog);
-            }    
+                _context.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// Удаление записи истории с проверкой по id пользователя
+        /// </summary>
+        public void Delete(int id, string userId)
+        {
+            SearchLog searchLog = _context.SearchLogs.FirstOrDefault(sl => sl.Id == id && sl.CustomerId == userId);
+            if (searchLog != null)
+            {
+                searchLog.IsDeleted = true;
+                _context.SearchLogs.Update(searchLog);
+                _context.SaveChanges();
+            }
         }
     }
 }
