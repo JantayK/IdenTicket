@@ -28,7 +28,7 @@ namespace IdenTicket.ViewModels
         public DateTime DepartDate { get; set; }
 
         [DataType(DataType.Date)]
-        [ValidateDate(ErrorMessage = "Некорректная дата отбытия")]
+        [ValidateDate(ErrorMessage = "Некорректная дата возврата")]
         [Display(Name = "Дата возврата")]
         public DateTime? ReturnDate { get; set; }
 
