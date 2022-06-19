@@ -1,8 +1,16 @@
-﻿@{
+﻿@model SearchViewModel
+
+@{
     ViewData["Title"] = "Главная";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Рады видеть вас!</h1>
-    <p>Добро пожаловать на IdenTicket, лучший в мире поисковик авиабилетов.</p>
+<div class="d-flex flex-column justify-content-center" style="height: 70vh;">
+    <div>
+
+    </div>
+    <partial name="_SearchPartial" model="Model" />
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

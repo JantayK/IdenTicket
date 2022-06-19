@@ -1,5 +1,7 @@
-﻿using IdenTicket.Interfaces;
+﻿using IdenTicket.Enums;
+using IdenTicket.Interfaces;
 using IdenTicket.Models;
+using IdenTicket.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,7 +18,7 @@ namespace IdenTicket.Data.Repositories
         private readonly ApplicationDbContext _context;
         public FlightLegRepository(ApplicationDbContext context)
         {
-            context = _context;
+            _context = context;
         }
 
         /// <summary>
@@ -55,7 +57,7 @@ namespace IdenTicket.Data.Repositories
         {
             _context.Entry(item).State = EntityState.Modified;
         }
-        
+
         /// <summary>
         /// Удаление части маршрута
         /// </summary>
@@ -63,7 +65,7 @@ namespace IdenTicket.Data.Repositories
         public void Delete(int id)
         {
             FlightLeg flightLeg = _context.FlightLegs.Find(id);
-            if(flightLeg != null)
+            if (flightLeg != null)
             {
                 _context.FlightLegs.Remove(flightLeg);
             }
