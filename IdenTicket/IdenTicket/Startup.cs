@@ -27,14 +27,15 @@ namespace IdenTicket
             services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
                 options.User.RequireUniqueEmail = true;
-                options.User.AllowedUserNameCharacters = ".@qwertyuiopasdfghjklzxcvbnm1234567890";
+                options.User.AllowedUserNameCharacters = ".@qwertyuiopasdfghjklzxcvbnm" +
+                                                         "QWERTYUIOPASDFGHJKLZXCVBNM1234567890";
                 options.SignIn.RequireConfirmedAccount = false;
                 options.Password.RequiredLength = 4;
                 options.Password.RequireDigit = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireLowercase = false;
-            }).AddEntityFrameworkStores<ApplicationDbContext>();
+            }).AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddScoped<UnitOfWork>();
             services.AddControllersWithViews();
             services.AddRazorPages().AddRazorRuntimeCompilation();
