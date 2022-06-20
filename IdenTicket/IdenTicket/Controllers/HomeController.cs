@@ -29,6 +29,12 @@ namespace IdenTicket.Controllers
             return View(new SearchViewModel() { DepartDate = DateTime.Today });
         }
 
+        [HttpGet]
+        public IActionResult Index2(SearchViewModel searchViewModel)
+        {
+            return View("Index", searchViewModel);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Index(SearchViewModel searchViewModel)
