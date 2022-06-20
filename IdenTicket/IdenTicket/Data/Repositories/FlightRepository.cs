@@ -58,7 +58,8 @@ namespace IdenTicket.Data.Repositories
                         .Include(f => f.FlightLegs)
                             .ThenInclude(fl => fl.AirLine)
                         .Where(f =>
-                            f.FlightLegs
+                            f.FlightType == FlightType.DirectOneWay
+                            && f.FlightLegs
                             .AsQueryable()
                             .Any(fl =>
                                 ((fl.ArriveAirport.Name.Contains(model.DestinationAirport)
@@ -82,7 +83,8 @@ namespace IdenTicket.Data.Repositories
                         .Include(f => f.FlightLegs)
                             .ThenInclude(fl => fl.AirLine)
                         .Where(f =>
-                            f.FlightLegs
+                            f.FlightType == FlightType.DirectWithReturn
+                            && f.FlightLegs
                             .AsQueryable()
                             .Any(fl => fl.Direction == Direction.Forth
                                 && (fl.DepartAirport.Name.Contains(model.DepartureAirport)
@@ -109,7 +111,8 @@ namespace IdenTicket.Data.Repositories
                         .Include(f => f.FlightLegs)
                             .ThenInclude(fl => fl.AirLine)
                         .Where(f =>
-                            f.FlightLegs
+                            (f.FlightType == FlightType.TransitOneWay || f.FlightType == FlightType.TransferOneWay)
+                            && f.FlightLegs
                             .AsQueryable()
                             .Any(fl =>
                                 fl.Direction == Direction.Forth
@@ -142,7 +145,8 @@ namespace IdenTicket.Data.Repositories
                         .Include(f => f.FlightLegs)
                             .ThenInclude(fl => fl.AirLine)
                         .Where(f =>
-                            f.FlightLegs
+                            (f.FlightType == FlightType.TransitWithReturn || f.FlightType == FlightType.TransferWithReturn)
+                            && f.FlightLegs
                             .AsQueryable()
                             .Any(fl =>
                                 fl.Direction == Direction.Forth
@@ -181,6 +185,7 @@ namespace IdenTicket.Data.Repositories
         public void Create(Flight item)
         {
             _context.Flights.Add(item);
+            _context.SaveChanges();
         }
 
         /// <summary>
@@ -190,6 +195,7 @@ namespace IdenTicket.Data.Repositories
         public void Update(Flight item)
         {
             _context.Entry(item).State = EntityState.Modified;
+            _context.SaveChanges();
         }
 
         /// <summary>
@@ -199,9 +205,10 @@ namespace IdenTicket.Data.Repositories
         public void Delete(int id)
         {
             Flight flight = _context.Flights.Find(id);
-            if(flight != null)
+            if (flight != null)
             {
                 _context.Remove(flight);
+                _context.SaveChanges();
             }
         }
     }
