@@ -1,0 +1,66 @@
+﻿@model IEnumerable<IdenTicket.Models.SearchLog>
+
+@{
+    ViewData["Title"] = "TotalHistory";
+}
+
+<h1>Секретная история поиска пользователей</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                ФИО
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SearchDate)
+            </th>
+            <th style="width: 5%">
+                @Html.DisplayNameFor(model => model.DepartureAirport)
+            </th>
+            <th style="width: 5%">
+                @Html.DisplayNameFor(model => model.DestinationAirport)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DepartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReturnDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FlightType)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Customer.GetFullName()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SearchDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepartureAirport)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DestinationAirport)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReturnDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FlightType)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<var class="d-flex flex-row justify-content-center">
+    <a href="https://lalafo.kg/"><strong class="d-flex flex-column justify-content-center align-items-center box-primary solid" style="padding: 30px">ПРОДАТЬ ИНФОРМАЦИЮ</strong></a>
+</var>

@@ -1,0 +1,65 @@
+﻿@model IEnumerable<SearchLog>
+
+@{
+    ViewData["Title"] = "History";
+}
+
+<h1>История поиска рейсов</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SearchDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DepartureAirport)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DestinationAirport)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DepartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReturnDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FlightType)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SearchDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepartureAirport)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DestinationAirport)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReturnDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FlightType)
+                </td>
+                <td>
+                    @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+    @if (Model.Count() <= 0)
+    {
+        <p>Вы пока не искали рейсы или все записи удалены.</p>
+    }
+</table>

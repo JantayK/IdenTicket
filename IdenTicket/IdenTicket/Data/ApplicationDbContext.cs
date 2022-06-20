@@ -16,6 +16,7 @@ namespace IdenTicket.Data
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<Flight> Flights { get; set; }
         public DbSet<FlightLeg> FlightLegs { get; set; }
+        public DbSet<SearchLog> SearchLogs { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options) { }
@@ -37,6 +38,7 @@ namespace IdenTicket.Data
             var flightLegs = builder.Entity<FlightLeg>();
             var tickets = builder.Entity<Ticket>();
             var customers = builder.Entity<Customer>();
+            var searchLogs = builder.Entity<SearchLog>();
 
             users.ToTable("Users");
             users.Property(u => u.UserName).IsRequired();
@@ -101,6 +103,11 @@ namespace IdenTicket.Data
             flightLegs.HasOne(fl => fl.AirplaneModel)
                 .WithMany(a => a.FlightLegs)
                 .HasForeignKey(fl => fl.AirplaneModelId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            searchLogs.HasOne(sl => sl.Customer)
+                .WithMany(c => c.SearchLogs)
+                .HasForeignKey(sl => sl.CustomerId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }
