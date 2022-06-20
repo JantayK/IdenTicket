@@ -843,6 +843,115 @@ namespace IdenTicket.Data
                         DepartDate = new DateTime(2022, 06, 23).AddSeconds(rnd.Next(1, 86399)),
                         ArriveDate = new DateTime(2022, 06, 23).AddSeconds(rnd.Next(1, 86399)),
                     },
+                     new FlightLeg()
+                    {
+                        FlightId = transferWithReturnIds[1],
+                        Direction = Direction.Forth,
+                        LegNumber = 1,
+                        AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "МАУ").Id,
+                        AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Boeing 777").Id,
+                        DepartAirportId = context.Airports.FirstOrDefault(d => d.Name == "Manas International Airport").Id,
+                        ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "KBP" ).Id,
+                        DepartDate = new DateTime(2022, 06, 25).AddSeconds(rnd.Next(1, 86399)),
+                        ArriveDate = new DateTime(2022, 06, 25).AddSeconds(rnd.Next(1, 86399)),
+                    },
+                    new FlightLeg()
+                    {
+                        FlightId = transferWithReturnIds[1],
+                        Direction = Direction.Forth,
+                        LegNumber = 2,
+                        AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "МАУ").Id,
+                        AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Airbus A350").Id,
+                        DepartAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "KBP" ).Id,
+                        ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "KTW" ).Id,
+                        DepartDate = new DateTime(2022, 06, 25).AddSeconds(rnd.Next(1, 86399)),
+                        ArriveDate = new DateTime(2022, 06, 26).AddSeconds(rnd.Next(1, 86399)),
+                    },
+                    new FlightLeg()
+                    {
+                        FlightId = transferWithReturnIds[1],
+                        Direction = Direction.Back,
+                        LegNumber = 1,
+                        AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Аэрофлот").Id,
+                        AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Airbus A350").Id,
+                        DepartAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "KTW" ).Id,
+                        ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "ALA" ).Id,
+                        DepartDate = new DateTime(2022, 08, 10).AddSeconds(rnd.Next(1, 86399)),
+                        ArriveDate = new DateTime(2022, 08, 10).AddSeconds(rnd.Next(1, 86399)),
+                    },
+                    new FlightLeg()
+                    {
+                        FlightId = transferWithReturnIds[1],
+                        Direction = Direction.Back,
+                        LegNumber = 2,
+                        AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Аэрофлот").Id,
+                        AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Boeing 777").Id,
+                        DepartAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "ALA" ).Id,
+                        ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "FRU" ).Id,
+                        DepartDate = new DateTime(2022, 08, 11).AddSeconds(rnd.Next(1, 86399)),
+                        ArriveDate = new DateTime(2022, 08, 11).AddSeconds(rnd.Next(1, 86399)),
+                    },
+                    //////////////////////////////
+                     new FlightLeg()
+                    {
+                        FlightId = transferWithReturnIds[2],
+                        Direction = Direction.Forth,
+                        LegNumber = 1,
+                        AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Air Manas").Id,
+                        AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Boeing 777").Id,
+                        DepartAirportId = context.Airports.FirstOrDefault(d => d.Name == "Manas International Airport").Id,
+                        ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "DYU" ).Id,
+                        DepartDate = new DateTime(2022, 06, 25).AddSeconds(rnd.Next(1, 86399)),
+                        ArriveDate = new DateTime(2022, 06, 25).AddSeconds(rnd.Next(1, 86399)),
+                    },
+                    new FlightLeg()
+                    {
+                        FlightId = transferWithReturnIds[2],
+                        Direction = Direction.Forth,
+                        LegNumber = 2,
+                        AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "МАУ").Id,
+                        AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Airbus A350").Id,
+                        DepartAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "DYU" ).Id,
+                        ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "MSQ" ).Id,
+                        DepartDate = new DateTime(2022, 06, 25).AddSeconds(rnd.Next(1, 86399)),
+                        ArriveDate = new DateTime(2022, 06, 26).AddSeconds(rnd.Next(1, 86399)),
+                    },
+                    new FlightLeg()
+                    {
+                        FlightId = transferWithReturnIds[2],
+                        Direction = Direction.Forth,
+                        LegNumber = 3,
+                        AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Avia Traffic Company").Id,
+                        AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Airbus A319neo").Id,
+                        DepartAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "MSQ" ).Id,
+                        ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "KTW" ).Id,
+                        DepartDate = new DateTime(2022, 06, 25).AddSeconds(rnd.Next(1, 86399)),
+                        ArriveDate = new DateTime(2022, 06, 26).AddSeconds(rnd.Next(1, 86399)),
+                    },
+                    new FlightLeg()
+                    {
+                        FlightId = transferWithReturnIds[2],
+                        Direction = Direction.Back,
+                        LegNumber = 1,
+                        AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Air Baltic").Id,
+                        AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Airbus A350").Id,
+                        DepartAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "KTW" ).Id,
+                        ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "IST" ).Id,
+                        DepartDate = new DateTime(2022, 08, 10).AddSeconds(rnd.Next(1, 86399)),
+                        ArriveDate = new DateTime(2022, 08, 10).AddSeconds(rnd.Next(1, 86399)),
+                    },
+                    new FlightLeg()
+                    {
+                        FlightId = transferWithReturnIds[2],
+                        Direction = Direction.Back,
+                        LegNumber = 2,
+                        AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Газпром Авиа").Id,
+                        AirplaneModelId = context.AirplaneModels.FirstOrDefault(am => am.Model == "Boeing 777").Id,
+                        DepartAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "IST" ).Id,
+                        ArriveAirportId = context.Airports.FirstOrDefault(ar => ar.IATA == "FRU" ).Id,
+                        DepartDate = new DateTime(2022, 08, 11).AddSeconds(rnd.Next(1, 86399)),
+                        ArriveDate = new DateTime(2022, 08, 11).AddSeconds(rnd.Next(1, 86399)),
+                    },
                 };
                 context.FlightLegs.AddRange(flightlegs);
                 context.SaveChanges();
