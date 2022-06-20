@@ -28,6 +28,7 @@
                 @Html.DisplayNameFor(model => model.FlightType)
             </th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -51,6 +52,16 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.FlightType)
+                </td>
+                <td>
+                    @Html.ActionLink("Искать", "Index2", "Home", new SearchViewModel()
+                    {
+                        DepartureAirport = item.DepartureAirport,
+                        DestinationAirport = item.DestinationAirport,
+                        DepartDate = item.DepartDate,
+                        ReturnDate = item.ReturnDate,
+                        FlightType = item.FlightType
+                    })
                 </td>
                 <td>
                     @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
