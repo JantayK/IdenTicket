@@ -34,7 +34,7 @@ namespace IdenTicket
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireLowercase = false;
-            }).AddEntityFrameworkStores<ApplicationDbContext>();
+            }).AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddScoped<UnitOfWork>();
             services.AddControllersWithViews();
             services.AddRazorPages().AddRazorRuntimeCompilation();

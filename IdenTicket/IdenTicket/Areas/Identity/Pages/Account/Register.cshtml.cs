@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using IdenTicket.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -16,15 +17,18 @@ namespace IdenTicket.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly ApplicationDbContext _context;
         private readonly ILogger<RegisterModel> _logger;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
+            ApplicationDbContext context,
             ILogger<RegisterModel> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
             _logger = logger;
         }
 
@@ -71,6 +75,11 @@ namespace IdenTicket.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    user = _context.Users.FirstOrDefault(u => u.UserName == user.UserName);
+                    var role = _context.Roles.FirstOrDefault(r => r.Name == "Customer");
+                    _context.UserRoles.Add(new IdentityUserRole<string>() { RoleId = role.Id, UserId = user.Id });
+                    _context.SaveChanges();
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
