@@ -366,13 +366,33 @@ namespace IdenTicket.Data
                 context.Airports.AddRange(airports);
                 context.SaveChanges();
             }
-            if(!context.Flights.Any())
+            if (!context.Flights.Any())
             {
                 var flights = new List<Flight>
                 {
                     new Flight()
                     {
                         FlightType = FlightType.DirectOneWay
+                    },
+                    new Flight()
+                    {
+                        FlightType = FlightType.DirectOneWay
+                    },
+                    new Flight()
+                    {
+                        FlightType = FlightType.DirectOneWay
+                    },
+                    new Flight()
+                    {
+                        FlightType = FlightType.DirectWithReturn
+                    },
+                    new Flight()
+                    {
+                        FlightType = FlightType.DirectWithReturn
+                    },
+                    new Flight()
+                    {
+                        FlightType = FlightType.DirectWithReturn
                     },
                     new Flight()
                     {
@@ -384,7 +404,35 @@ namespace IdenTicket.Data
                     },
                     new Flight()
                     {
+                        FlightType = FlightType.TransferOneWay
+                    },
+                    new Flight()
+                    {
+                        FlightType = FlightType.TransferOneWay
+                    },
+                    new Flight()
+                    {
                         FlightType = FlightType.TransferWithReturn
+                    },
+                    new Flight()
+                    {
+                        FlightType = FlightType.TransferWithReturn
+                    },
+                    new Flight()
+                    {
+                        FlightType = FlightType.TransferWithReturn
+                    },
+                    new Flight()
+                    {
+                        FlightType = FlightType.TransferWithReturn
+                    },
+                    new Flight()
+                    {
+                        FlightType = FlightType.TransitOneWay
+                    },
+                    new Flight()
+                    {
+                        FlightType = FlightType.TransitOneWay
                     },
                     new Flight()
                     {
@@ -398,13 +446,20 @@ namespace IdenTicket.Data
                 context.Flights.AddRange(flights);
                 context.SaveChanges();
             }
-            if(!context.FlightLegs.Any())
+            if (!context.FlightLegs.Any())
             {
+                var directOneWayIds = context.Flights.Where(f => f.FlightType == FlightType.DirectOneWay).Select(f => f.Id).ToArray();
+                var directWithReturnIds = context.Flights.Where(f => f.FlightType == FlightType.DirectWithReturn).Select(f => f.Id).ToArray();
+                var transferOneWayIds = context.Flights.Where(f => f.FlightType == FlightType.TransferOneWay).Select(f => f.Id).ToArray();
+                var transferWithReturnIds = context.Flights.Where(f => f.FlightType == FlightType.TransferWithReturn).Select(f => f.Id).ToArray();
+                var transitOneWayIds = context.Flights.Where(f => f.FlightType == FlightType.TransitOneWay).Select(f => f.Id).ToArray();
+                var transitWithReturnIds = context.Flights.Where(f => f.FlightType == FlightType.TransitWithReturn).Select(f => f.Id).ToArray();
+
                 var flightlegs = new List<FlightLeg>
                 {
                     new FlightLeg()
                     {
-                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.DirectOneWay).Id,
+                        FlightId = directOneWayIds[0],
                         Direction = Direction.Forth,
                         LegNumber = 1,
                         AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Air Astana").Id,
@@ -416,7 +471,7 @@ namespace IdenTicket.Data
                     },
                     new FlightLeg()
                     {
-                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.DirectWithReturn).Id,
+                        FlightId = directWithReturnIds[0],
                         Direction = Direction.Forth,
                         LegNumber = 1,
                         AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Air Manas").Id,
@@ -428,7 +483,7 @@ namespace IdenTicket.Data
                     },
                     new FlightLeg()
                     {
-                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.DirectWithReturn).Id,
+                        FlightId = directWithReturnIds[0],
                         Direction = Direction.Back,
                         LegNumber = 1,
                         AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Air Manas").Id,
@@ -440,7 +495,7 @@ namespace IdenTicket.Data
                     },
                     new FlightLeg()
                     {
-                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.TransferOneWay).Id,
+                        FlightId = transferOneWayIds[0],
                         Direction = Direction.Forth,
                         LegNumber = 1,
                         AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Газпром Авиа").Id,
@@ -452,7 +507,7 @@ namespace IdenTicket.Data
                     },
                     new FlightLeg()
                     {
-                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.TransferOneWay).Id,
+                        FlightId = transferOneWayIds[0],
                         Direction = Direction.Forth,
                         LegNumber = 2,
                         AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Газпром Авиа").Id,
@@ -464,7 +519,7 @@ namespace IdenTicket.Data
                     },
                     new FlightLeg()
                     {
-                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.TransferWithReturn).Id,
+                        FlightId = transferWithReturnIds[0],
                         Direction = Direction.Forth,
                         LegNumber = 1,
                         AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "МАУ").Id,
@@ -476,7 +531,7 @@ namespace IdenTicket.Data
                     },
                     new FlightLeg()
                     {
-                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.TransferWithReturn).Id,
+                        FlightId = transferWithReturnIds[0],
                         Direction = Direction.Forth,
                         LegNumber = 2,
                         AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "МАУ").Id,
@@ -488,7 +543,7 @@ namespace IdenTicket.Data
                     },
                     new FlightLeg()
                     {
-                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.TransferWithReturn).Id,
+                        FlightId = transferWithReturnIds[0],
                         Direction = Direction.Back,
                         LegNumber = 1,
                         AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Аэрофлот").Id,
@@ -500,7 +555,7 @@ namespace IdenTicket.Data
                     },
                     new FlightLeg()
                     {
-                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.TransferWithReturn).Id,
+                        FlightId = transferWithReturnIds[0],
                         Direction = Direction.Back,
                         LegNumber = 2,
                         AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Аэрофлот").Id,
@@ -512,7 +567,7 @@ namespace IdenTicket.Data
                     },
                     new FlightLeg()
                     {
-                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.TransitOneWay).Id,
+                        FlightId = transitOneWayIds[0],
                         Direction = Direction.Forth,
                         LegNumber = 1,
                         AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Avia Traffic Company").Id,
@@ -524,7 +579,7 @@ namespace IdenTicket.Data
                     },
                     new FlightLeg()
                     {
-                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.TransitOneWay).Id,
+                        FlightId = transitOneWayIds[0],
                         Direction = Direction.Forth,
                         LegNumber = 2,
                         AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Avia Traffic Company").Id,
@@ -536,7 +591,7 @@ namespace IdenTicket.Data
                     },
                     new FlightLeg()
                     {
-                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.TransitWithReturn).Id,
+                        FlightId = transitWithReturnIds[0],
                         Direction = Direction.Forth,
                         LegNumber = 1,
                         AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Air Astana").Id,
@@ -548,7 +603,7 @@ namespace IdenTicket.Data
                     },
                     new FlightLeg()
                     {
-                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.TransitWithReturn).Id,
+                        FlightId = transitWithReturnIds[0],
                         Direction = Direction.Forth,
                         LegNumber = 2,
                         AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Air Astana").Id,
@@ -560,7 +615,7 @@ namespace IdenTicket.Data
                     },
                     new FlightLeg()
                     {
-                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.TransitWithReturn).Id,
+                        FlightId = transitWithReturnIds[0],
                         Direction = Direction.Back,
                         LegNumber = 1,
                         AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Air Astana").Id,
@@ -572,7 +627,7 @@ namespace IdenTicket.Data
                     },
                     new FlightLeg()
                     {
-                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.TransitWithReturn).Id,
+                        FlightId = transitWithReturnIds[0],
                         Direction = Direction.Back,
                         LegNumber = 2,
                         AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Air Astana").Id,
@@ -584,7 +639,7 @@ namespace IdenTicket.Data
                     },
                     new FlightLeg()
                     {
-                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.TransferOneWay).Id,
+                        FlightId = transferOneWayIds[1],
                         Direction = Direction.Forth,
                         LegNumber = 1,
                         AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Air Astana").Id,
@@ -596,7 +651,7 @@ namespace IdenTicket.Data
                     },
                     new FlightLeg()
                     {
-                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.TransferOneWay).Id,
+                        FlightId = transferOneWayIds[1],
                         Direction = Direction.Forth,
                         LegNumber = 2,
                         AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Таджик Эйр").Id,
@@ -608,7 +663,7 @@ namespace IdenTicket.Data
                     },
                     new FlightLeg()
                     {
-                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.TransferOneWay).Id,
+                        FlightId = transferOneWayIds[2],
                         Direction = Direction.Forth,
                         LegNumber = 1,
                         AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Газпром Авиа").Id,
@@ -620,7 +675,7 @@ namespace IdenTicket.Data
                     },
                     new FlightLeg()
                     {
-                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.TransferOneWay).Id,
+                        FlightId = transferOneWayIds[2],
                         Direction = Direction.Forth,
                         LegNumber = 2,
                         AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Аэрофлот").Id,
@@ -632,7 +687,7 @@ namespace IdenTicket.Data
                     },
                     new FlightLeg()
                     {
-                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.DirectOneWay).Id,
+                        FlightId = directOneWayIds[1],
                         Direction = Direction.Forth,
                         LegNumber = 1,
                         AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Аэрофлот").Id,
@@ -644,7 +699,7 @@ namespace IdenTicket.Data
                     },
                     new FlightLeg()
                     {
-                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.DirectOneWay).Id,
+                        FlightId = directOneWayIds[2],
                         Direction = Direction.Forth,
                         LegNumber = 1,
                         AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "РубиСтар").Id,
@@ -656,7 +711,7 @@ namespace IdenTicket.Data
                     },
                     new FlightLeg()
                     {
-                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.TransitOneWay).Id,
+                        FlightId = transitOneWayIds[1],
                         Direction = Direction.Forth,
                         LegNumber = 1,
                         AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "САР").Id,
@@ -668,7 +723,7 @@ namespace IdenTicket.Data
                     },
                     new FlightLeg()
                     {
-                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.TransitOneWay).Id,
+                        FlightId = transitOneWayIds[1],
                         Direction = Direction.Forth,
                         LegNumber = 2,
                         AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "САР").Id,
@@ -678,10 +733,10 @@ namespace IdenTicket.Data
                         DepartDate = new DateTime(2022, 06, 21).AddSeconds(rnd.Next(1, 86399)),
                         ArriveDate = new DateTime(2022, 06, 21).AddSeconds(rnd.Next(1, 86399)),
                     },
-                    
+
                     new FlightLeg()
                     {
-                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.DirectWithReturn).Id,
+                        FlightId = directWithReturnIds[1],
                         Direction = Direction.Forth,
                         LegNumber = 1,
                         AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Air Baltic").Id,
@@ -693,7 +748,7 @@ namespace IdenTicket.Data
                     },
                     new FlightLeg()
                     {
-                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.DirectWithReturn).Id,
+                        FlightId = directWithReturnIds[1],
                         Direction = Direction.Back,
                         LegNumber = 1,
                         AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "Air Baltic").Id,
@@ -705,7 +760,7 @@ namespace IdenTicket.Data
                     },
                     new FlightLeg()
                     {
-                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.TransitOneWay).Id,
+                        FlightId = transitOneWayIds[2],
                         Direction = Direction.Forth,
                         LegNumber = 1,
                         AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "САР").Id,
@@ -717,7 +772,7 @@ namespace IdenTicket.Data
                     },
                     new FlightLeg()
                     {
-                        FlightId = context.Flights.FirstOrDefault(f => f.FlightType == FlightType.TransitOneWay).Id,
+                        FlightId = transitOneWayIds[2],
                         Direction = Direction.Forth,
                         LegNumber = 2,
                         AirLineId = context.AirLines.FirstOrDefault(a => a.Name == "САР").Id,
