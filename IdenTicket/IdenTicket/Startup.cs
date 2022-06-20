@@ -27,7 +27,8 @@ namespace IdenTicket
             services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
                 options.User.RequireUniqueEmail = true;
-                options.User.AllowedUserNameCharacters = ".@qwertyuiopasdfghjklzxcvbnm1234567890";
+                options.User.AllowedUserNameCharacters = ".@qwertyuiopasdfghjklzxcvbnm" +
+                                                         "QWERTYUIOPASDFGHJKLZXCVBNM1234567890";
                 options.SignIn.RequireConfirmedAccount = false;
                 options.Password.RequiredLength = 4;
                 options.Password.RequireDigit = false;
