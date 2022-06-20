@@ -71,7 +71,7 @@ namespace IdenTicket.Data.Repositories
                     break;
                 case FlightType.DirectWithReturn:
                     if (!model.ReturnDate.HasValue)
-                        throw new ArgumentNullException("Дата возврата не может быть пустой");
+                        model.ReturnDate = new DateTime();
                     result = _context.Flights
                         .AsQueryable()
                         .Include(f => f.FlightLegs)
@@ -133,7 +133,7 @@ namespace IdenTicket.Data.Repositories
                 case FlightType.TransitWithReturn:
                 case FlightType.TransferWithReturn:
                     if (!model.ReturnDate.HasValue)
-                        throw new ArgumentNullException("Дата возврата не может быть пустой");
+                        model.ReturnDate = new DateTime();
                     result = _context.Flights
                         .AsQueryable()
                         .Include(f => f.FlightLegs)
