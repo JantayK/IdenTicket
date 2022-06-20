@@ -30,7 +30,7 @@ a {
     top: 10px;
     position: relative;
     background-color: whitesmoke;
-    border: 4px solid slategray;
+    border: 4px solid #00a3ff;
     border-radius: 20px;
 }
 
@@ -43,7 +43,7 @@ a {
 
 .top {
     height: 40%;
-    border-bottom: 4px solid slategray;
+    border-bottom: 4px solid #00a3ff;
 }
 
 .bottom {
@@ -53,13 +53,13 @@ a {
 
 .box-primary {
     min-height: 90px;
-    box-shadow: 4px 0 0 0 slategray, 0 4px 0 0 slategray, 4px 4px 0 0 slategray, 4px 0 0 0 slategray inset, 0 4px 0 0 slategray inset, 4px 4px 0 0 slategray inset;
+    box-shadow: 4px 0 0 0 #00a3ff, 0 4px 0 0 #00a3ff, 4px 4px 0 0 #00a3ff, 4px 0 0 0 #00a3ff inset, 0 4px 0 0 #00a3ff inset, 4px 4px 0 0 #00a3ff inset;
     border-radius: 5px;
     background-color: whitesmoke;
 }
 
     .box-primary.solid {
-        background-color: slategray;
+        background-color: #00a3ff;
         color: whitesmoke;
         border-radius: 4px;
     }
